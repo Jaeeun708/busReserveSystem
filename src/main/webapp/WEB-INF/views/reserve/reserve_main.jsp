@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!-- jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -7,117 +7,117 @@
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
 <!-- 승차권 조회 부분(#reserve_content1) -->
-<div id="reserve_content1">
-	<div id="reserve_search">
-		<div class="content_title"><i class="title_icon fa-solid fa-magnifying-glass"></i>승차권 예매 > 예매정보 조회</div>
-		<ul class="nav nav-tabs" id="myTab" role="tablist">
-			<li class="nav-item" role="presentation">
-				<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+	<div id="reserve_content1">
+		<div id="reserve_search">
+			<div class="content_title"><i class="title_icon fa-solid fa-magnifying-glass"></i>승차권 예매 > 예매정보 조회</div>
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
 						data-bs-target="#home-tab-pane" type="button" role="tab"
 						aria-controls="home-tab-pane" aria-selected="true">편도</button>
-			</li>
-			<li class="nav-item" role="presentation">
-				<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
 						data-bs-target="#profile-tab-pane" type="button" role="tab"
 						aria-controls="profile-tab-pane" aria-selected="false">왕복</button>
-			</li>
-		</ul>
-		<div class="tab-content" id="myTabContent">
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
 			<!-- 편도탭 조회 목록 -->
-			<div class="tab-pane fade show active" id="home-tab-pane"
-				 role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-				<table class="searchTable">
-					<tr>
-						<td class="departureTerminal">
-							<input type="text" class="form-control" id="start_point" placeholder="출발지를 선택해주세요." aria-label="default input example">
-							<button class="btn btn-secondary" id="choice_terminal"><i class="fa-solid fa-magnifying-glass"></i></button>
-						</td>
-						<td></td>
-					</tr>
-					<tr>
-						<td class="arrivalTerminal">
-							<input type="text" class="form-control" id="end_point" placeholder="도착지를 선택해주세요." aria-label="default input example">
-							<button class="btn btn-secondary" id="choice_terminal2"><i class="fa-solid fa-magnifying-glass"></i></button>
-						</td>
-						<td class="search_date">
-							<input type="text" id="datepicker" class="form-control" placeholder="날짜를 선택해주세요." aria-label="default input example">
-							<button class="btn_get_dispatches btn btn-secondary">배차정보조회하기</button>
-						</td>
-					</tr>
-				</table>
-
+				<div class="tab-pane fade show active" id="home-tab-pane"
+					role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+					<table class="searchTable">
+						<tr>
+							<td class="departureTerminal">
+								<input type="text" class="form-control" id="start_point" placeholder="출발지를 선택해주세요." aria-label="default input example">
+								<button class="btn btn-secondary" id="choice_terminal"><i class="fa-solid fa-magnifying-glass"></i></button>
+							</td>
+							<td></td>
+						</tr>
+						<tr>
+							<td class="arrivalTerminal">
+								<input type="text" class="form-control" id="end_point" placeholder="도착지를 선택해주세요." aria-label="default input example">
+								<button class="btn btn-secondary" id="choice_terminal2"><i class="fa-solid fa-magnifying-glass"></i></button>
+							</td>
+							<td class="search_date">
+								<input type="text" id="datepicker" class="form-control" placeholder="날짜를 선택해주세요." aria-label="default input example">
+								<button class="btn_get_dispatches btn btn-secondary">배차정보조회하기</button>
+							</td>
+						</tr>
+					</table>
+						
+				</div>
+				<!-- 왕복탭 조회 목록 -->
+				<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
+					aria-labelledby="profile-tab" tabindex="0">...</div>
 			</div>
-			<!-- 왕복탭 조회 목록 -->
-			<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
-				 aria-labelledby="profile-tab" tabindex="0">...</div>
 		</div>
 	</div>
-</div>
-<!-- #reserve_content1 끝 -->
-
-<!-- 조회 목록 선택 후 배자 목록(#reserve_content2) -->
-<div id="reserve_content2">
-	<div class="dispatchTitle"><i class="fa-solid fa-check"></i><b>배차정보</b></div>
-	* 조회 정보를 선택해 주세요.
-	<!-- 조회 조건에 대한 배차정보 -->
-	<table id = "dispatch" class="table table-hover">
-		<thead>
-		<tr>
-			<th scope="col">버스</th>
-			<th scope="col">출발일시</th>
-			<th scope="col">출발지</th>
-			<th scope="col">도착지</th>
-			<th scope="col">총좌석수</th>
-			<th scope="col">좌석선택</th>
-		</tr>
-		</thead>
-		<!-- 배차정보 들어가는 부분 -->
-		<tbody id="dispatchTbody">
-
-		</tbody>
-	</table>
-</div>
-<!-- #reserve_content2 끝 -->
-
-<!-- 출발지터미널, 도착지터미널 검색 modal -->
-<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog  modal-xl">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>터미널 선택<strong></h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal"
+	<!-- #reserve_content1 끝 -->
+	
+	<!-- 조회 목록 선택 후 배자 목록(#reserve_content2) -->
+	<div id="reserve_content2">
+		<div class="dispatchTitle"><i class="fa-solid fa-check"></i><b>배차정보</b></div>
+		* 조회 정보를 선택해 주세요.
+		<!-- 조회 조건에 대한 배차정보 -->
+		<table id = "dispatch" class="table table-hover">
+			<thead>
+			    <tr>
+			      <th scope="col">버스</th>
+			      <th scope="col">출발일시</th>
+			      <th scope="col">출발지</th>
+			      <th scope="col">도착지</th>
+			      <th scope="col">총좌석수</th>
+			      <th scope="col">좌석선택</th>
+			    </tr>
+			 </thead>
+			 <!-- 배차정보 들어가는 부분 -->
+			 <tbody id="dispatchTbody">
+			 
+			 </tbody>
+		</table>
+	</div>
+	<!-- #reserve_content2 끝 -->
+	
+	<!-- 출발지터미널, 도착지터미널 검색 modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog  modal-xl">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>터미널 선택<strong></h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
 						aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				* 출발지 터미널을 선택해주세요.<br>
-				<div name = "startLayer">
-					<strong><i class="fa-solid fa-check"></i>출발지 터미널</strong>
-					<table>
-						<c:forEach items ="${terminals}" var="terminal">
-							<tr>
-								<td class = "obj_visible">
-									<a href ="#" class = "terminal-link">[${terminal.region}]${terminal.terminalName}</a>
-								</td>
-							</tr>
-						</c:forEach>
-					</table>
 				</div>
-				<div name = "endLayer">
-					<strong><i class="fa-solid fa-check"></i>도착지 터미널</strong>
-					<table id ="destinationTerminal">
-					</table>
+				<div class="modal-body">
+					* 출발지 터미널을 선택해주세요.<br>
+					<div name = "startLayer">
+						<strong><i class="fa-solid fa-check"></i>출발지 터미널</strong>
+						<table>
+							<c:forEach items ="${terminals}" var="terminal">
+								<tr>
+									<td class = "obj_visible">
+										<a href ="#" class = "terminal-link">[${terminal.region}]${terminal.terminalName}</a>
+									</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+					<div name = "endLayer">
+						<strong><i class="fa-solid fa-check"></i>도착지 터미널</strong>
+						<table id ="destinationTerminal">
+						</table>
+					</div>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary"
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
 						data-bs-dismiss="modal">닫기</button>
-				<button type="button" class="btn btn-primary">저장</button>
-				<button type="button" class="btn btn-reset">초기화</button>
+					<button type="button" class="btn btn-primary">저장</button>
+					<button type="button" class="btn btn-reset">초기화</button>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- 출발지터미널, 도착지터미널 검색 modal 끝 -->
+	<!-- 출발지터미널, 도착지터미널 검색 modal 끝 -->
 
 <!-- 입력정보확인(예매내역) 모달창 -->
 <div class="modal fade" id="seatInfoModal" tabindex="-1" role="dialog" aria-labelledby="seatInfoModalLabel" aria-hidden="true">
@@ -449,8 +449,8 @@
 
 <!-- JS 부트스트랩 적용 -->
 <script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+	crossorigin="anonymous"></script>
 <!-- footer -->
 <%@include file="../includes/footer.jsp"%>
