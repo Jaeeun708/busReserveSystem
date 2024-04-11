@@ -1,5 +1,56 @@
 @charset "UTF-8";
 /*폰트*/
+*{
+	margin:0px;
+	padding:0px;
+}
+
+#header {
+	width: 100%;
+	height: 70px;
+	position: fixed; /* 화면 상단에 고정 */
+	top: 0; /* 화면의 맨 위에 배치 */
+	z-index: 9999; /* 다른 요소보다 위에 표시 */
+}
+
+#main_wrap {
+	margin-top: 90px; /* 메인 컨텐츠가 헤더 아래에 표시되도록 마진 설정 */
+}
+#info_nav {
+	position: absolute;
+	right: 20px;
+}
+#logo {
+	margin-top: 5px;
+	float: left;
+	height: 50px;
+}
+#info_nav>ul>li {
+	float: left;
+	margin-left: 10px;
+	font-weight: bold;
+	font-family: "IBM Plex Sans KR", sans-serif;
+	font-size: 16px;
+}
+#info_nav>ul>li>a{
+	text-decoration: none;
+	color: #000000;
+}
+
+#menu_nav>ul>li {
+	float: left;
+	margin-top: 15px;
+	margin-left: 25px;
+	font-size: 23px;
+	font-weight: bold;
+	font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+ul{
+	list-style-type: none;
+}
+
+
 body {
 	font-family: "IBM Plex Sans KR", sans-serif;
 	font-weight: bold;
@@ -49,7 +100,7 @@ i.title_icon{
 button.nav-link{
 	font-size: 19px;
 	color:#ffffff;
-} 
+}
 .nav-tabs{
 	border-bottom:1px solid #68B3CE;
 }
@@ -60,13 +111,13 @@ button.nav-link{
 	border-radius: 0 10px 10px 10px;
 	background-color:#ffffff;
 	font-size: 18px;
-} 
+}
 /*출발지, 선택지 부분*/
 #myTabContent tr,#myTabContent td{
 	padding-top:20px;
 	padding-left:20px;
 }
- .departureTerminal > input, .arrivalTerminal > input, .search_date > input{
+.departureTerminal > input, .arrivalTerminal > input, .search_date > input{
 	width:200px;
 	float:left;
 }
@@ -131,27 +182,27 @@ div[name="endLayer"]{
 }
 /*좌석*/
 .seat-table {
-    border-collapse: collapse;
-    width: 40%;
-    margin-left: 15px; 
+	border-collapse: collapse;
+	width: 40%;
+	margin-left: 15px;
 }
 
 .seat-table th, .seat-table td {
-    border: 1px solid black;
-    text-align: center;
-    width:20% /* td 폭 균등하게 분배 */
+	border: 1px solid black;
+	text-align: center;
+	width:20% /* td 폭 균등하게 분배 */
 }
 /* 3번째 열의 테두리를 없애는 스타일 마지막 라인은 남김.*/
 .hidden {
-    display: none;
+	display: none;
 }
 .choiced{
 	background-color: #68B3CE;
 }
 #header_bottom_search {
-   clear: both;
+	clear: both;
 }
-.seat-table tr:not(:last-child) td:nth-child(3) { 
+.seat-table tr:not(:last-child) td:nth-child(3) {
 	border-bottom: none;
 	border-top: none;
 }
@@ -167,16 +218,16 @@ div[name="endLayer"]{
 	border-left : none;
 }
 .seat-container {
-    position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
-    width: 100%; /* 부모 요소에 꽉 차게 설정 */
+	position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
+	width: 100%; /* 부모 요소에 꽉 차게 설정 */
 }
 .seat-container span {
-    position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
-    top: 50%; /* 상단 위치를 중앙으로 이동 */
-    left: 50%; /* 좌측 위치를 중앙으로 이동 */
-    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
-    font-size: 14px; /* 숫자의 크기 설정 */
-    color: black; /* 숫자의 색상 설정 */
+	position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
+	top: 50%; /* 상단 위치를 중앙으로 이동 */
+	left: 50%; /* 좌측 위치를 중앙으로 이동 */
+	transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
+	font-size: 14px; /* 숫자의 크기 설정 */
+	color: black; /* 숫자의 색상 설정 */
 }
 
 /*로그인 페이지*/
@@ -196,20 +247,27 @@ div.bg-white{
 }
 /*회원가입 페이지*/
 #join_content1{
-	padding-top:90px;
+	padding-top:80px;
 	width:30%;
 	margin: 0 auto;
 }
 #join_content1 .content_title{
-	margin-top:10px;
 	color: #000000;
-	font-size:25px;
+	font-size:20px;
+	font-family: "IBM Plex Sans KR", sans-serif;
 }
 #join_content1 > form{
-	margin-top:20px;
+	margin-top:15px;
 }
 #join_content1 .form-group{
 	margin-bottom:15px;
+}
+
+#join_content1 .form-group .btn{
+	background: #68B3CE;
+	color: black;
+	border: 1px solid;
+	font-weight: bold;
 }
 
 /*마이페이지*/
@@ -221,7 +279,7 @@ div.bg-white{
 	color: #000000;
 	font-size: 25px;
 	text-align: center;
-	margin-bottom:10px; 
+	margin-bottom:10px;
 }
 .content_title2{
 	font-size:18px;
@@ -236,12 +294,18 @@ div.bg-white{
 	margin: 0 auto;
 }
 .myInfo tr,.myInfo td,.myInfo th{
+	font-size:18px;
 	border:1px solid #DEE2E6;
+	height: 50px;
 }
 .myInfo th{
 	text-align:center;
 	background: #68B3CE;
 	color:#ffffff;
+	width: 150px;
+}
+.myInfo td{
+	width: 250px;
 }
 
 /*관리자페이지*/

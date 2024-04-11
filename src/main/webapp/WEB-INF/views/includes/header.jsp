@@ -78,6 +78,13 @@
 					</sec:authorize>
 				</ul>
 			</div>
+			<div id="logo"><img src="/resources/img/logo2.png"/></div>
+			<div id="menu_nav">
+				<ul>
+					<li>승차권예매</li>
+					<li>조회/변경/취소</li>
+				</ul>
+			</div>
 		</div>
-	</nav>
+		</div>
 </div>
