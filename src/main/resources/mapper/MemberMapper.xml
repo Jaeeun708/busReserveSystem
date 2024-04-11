@@ -7,12 +7,14 @@
 
     <!-- 사용자 추가(회원가입) -->
     <insert id="saveMember" >
-        INSERT INTO user_info (id, password, name, birth, phone_no, email, type)
+        INSERT INTO user_info (id, password, name, birth,  phone_no, email, type)
         VALUES (#{id}, #{password}, #{name}, TO_DATE(#{birth}, 'YYYY-MM-DD HH24:MI:SS'), #{phoneNo}, #{email}, 'ROLE_MEMBER')
     </insert>
 
     <!--사용자 조회(로그인)-->
     <select id="getUser" resultType="com.kosta.bus_reserve.domain.UserVO">
-        SELECT * FROM user_info WHERE id = #{id}
+        SELECT id, password, name, birth, phone_no AS phoneNo, email, type
+        FROM user_info
+        WHERE id = #{id}
     </select>
 </mapper>

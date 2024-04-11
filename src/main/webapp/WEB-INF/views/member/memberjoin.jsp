@@ -69,36 +69,40 @@
     });
 </script>
 
-<form action="/member/register" method="post">
-    <div class="form-group has-feedback">
-        <label class="control-label" >아이디</label>
-        <input class="form-control" type="text" id="username" name="username" />
+<div id="join_content1">
+    <div class="content_title">
+        <form action="/member/register" method="post">
+            <div class="form-group has-feedback">
+                <label class="control-label" >아이디</label>
+                <input class="form-control" type="text" id="username" name="username" />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">비밀번호</label>
+                <input class="form-control" type="password" id="password" name="password" />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">이름</label>
+                <input class="form-control" type="text" id="name" name="name" />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">생년월일</label>
+                <input class="form-control" type="date" id="birth" name="birth" />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">휴대폰번호</label>
+                <input class="form-control" type="tel" id="phoneNo" name="phoneNo" />
+            </div>
+            <div class="form-group has-feedback">
+                <label class="control-label">이메일</label>
+                <input class="form-control" type="email" id="email" name="email" />
+            </div>
+            <div class="form-group has-feedback">
+                <button class="btn btn-success" type="submit" id="sineUp">회원가입</button>
+                <button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
+            </div>
+        </form>
     </div>
-    <div class="form-group has-feedback">
-        <label class="control-label">비밀번호</label>
-        <input class="form-control" type="password" id="password" name="password" />
-    </div>
-    <div class="form-group has-feedback">
-        <label class="control-label">이름</label>
-        <input class="form-control" type="text" id="name" name="name" />
-    </div>
-    <div class="form-group has-feedback">
-        <label class="control-label">생년월일</label>
-        <input class="form-control" type="date" id="birth" name="birth" />
-    </div>
-    <div class="form-group has-feedback">
-        <label class="control-label">휴대폰번호</label>
-        <input class="form-control" type="tel" id="phoneNo" name="phoneNo" />
-    </div>
-    <div class="form-group has-feedback">
-        <label class="control-label">이메일</label>
-        <input class="form-control" type="email" id="email" name="email" />
-    </div>
-    <div class="form-group has-feedback">
-        <button class="btn btn-success" type="submit" id="sineUp">회원가입</button>
-        <button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
-    </div>
-</form>
+</div>
 
 <!-- JS 부트스트랩 적용 -->
 <script
