@@ -18,7 +18,7 @@
                         <div class="col-12">
                             <div class="text-center mb-5">
                                 <a href="#!">
-                                    <img src="/resources/img/logo.png" width="175" height="57">
+                                    <img src="/resources/img/logo2.png" width="175" height="57">
                                 </a>
                             </div>
                         </div>
