@@ -9,7 +9,7 @@
 <body>
 
 <form id="memberForm" method="post">
-    <input type="text" name="id" placeholder="아이디">
+    <input type="text" name="id" id="userId" placeholder="아이디">
     <br>
     <input type="password" name="userName" placeholder="비밀번호">
     <button type="submit">로그인</button>
@@ -80,6 +80,16 @@
         // hidden input에 전화번호 설정
         document.getElementById("phoneNo3").value = phoneNo;
     }
+
+    // memberForm 제출 시
+    // document.getElementById("memberForm").addEventListener("submit", function(event) {
+    //     event.preventDefault(); // 기본 제출 동작 방지
+    //
+    //     var userId = document.getElementById("userId").value;
+    //
+    //     // URL에 id 파라미터 추가하여 다른 페이지로 이동
+    //     window.location.href = "mainRegisterPay/" + encodeURIComponent(userId);
+    // });
 
 </script>
 </html>

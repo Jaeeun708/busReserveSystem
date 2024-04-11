@@ -1,9 +1,9 @@
 package com.kosta.bus_reserve.controller;
 
-import com.kosta.bus_reserve.domain.UserVO;
 import com.kosta.bus_reserve.service.PayService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -21,23 +21,26 @@ public class PayController {
     @PostMapping("registerPay")
     public String postRegisterPay(@ModelAttribute("birth") String birth,
                                   @ModelAttribute("allPhoneNo") String phoneNo,
-                                  @ModelAttribute("id") String id
+                                  @RequestParam("id") String id,
+                                  Model model
     ) {
         System.out.println("birth: " + birth);
         System.out.println("phoneNo: " + phoneNo);
-        System.out.println("userId: " + id);
+        System.out.println("id: " + id);
 
-        return "mainRegisterPay";
+        if (id != null) {
+            model.addAttribute("userId", id);
+        }
+
+        return "redirect:mainRegisterPay/" + id;
     }
 
-    @GetMapping(value = {"mainRegisterPay", "mainRegisterPay/{id}"})
-    public String mainRegisterPay() {
-        return "mainRegisterPay";
+    @GetMapping("mainRegisterPay")
+    public String mainRegisterPay(@RequestParam(name = "id", required = false) String id) {
+        if (id != null) {
+            System.out.println("RequestParam id: " + id);
+        }
+        return "mainRegisterPay"; // id가 있든 없든 페이지 이동 수행
     }
-
-//    @PostMapping("registerPay")
-//    public UserVO userAndCard(@PathVariable String id) {
-//        return service.userAndCardInfo(id);
-//    }
 
 }
