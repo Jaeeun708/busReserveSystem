@@ -14,7 +14,7 @@ public class ManagerController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/manager_info")
-    public @ResponseBody String managerInfo(){
-        return "관리자 정보";
+    public String managerInfo(){
+        return "manager/manager_info";
     }
 }

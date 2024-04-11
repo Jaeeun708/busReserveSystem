@@ -64,6 +64,7 @@
     </div>
     <div class="content_title2">자주쓰는 카드
     <button type="button" class="btn-cardRegistration">등록</button>
+    <div class="card-info" style="display: none;">
         <label for="cardName">카드 이름</label>
         <input type="text" id="cardName" name="cardName" readonly value="${card.name}">
         <label for="cardNumber">카드 번호</label>
