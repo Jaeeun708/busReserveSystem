@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -26,6 +25,9 @@
         /* 회원가입 버튼 클릭시 DB저장*/
         $('#sineUp').on("click", function(){
 
+            // 기본 이벤트 제거
+            event.preventDefault();
+
             //XMLHttpRequest 객체 생성
             const xhr = new XMLHttpRequest();
             //입력값 변수에 저장
@@ -34,7 +36,7 @@
             var formattedDepartureTime = formatDateTimeFromInput(dateTimeInputValue);
 
             var obj = {
-                id : $('#id').val(),
+                id : $('#username').val(),
                 password : $('#password').val(),
                 name : $('#name').val(),
                 birth : formattedDepartureTime,
@@ -49,7 +51,6 @@
                 dataType: 'text',
                 data: JSON.stringify(obj),
                 contentType: 'application/json; charset=utf-8',
-                //csrf 값을 요청 전에 헤더에 담아서 보낸다.
                 success: function(data){
                     alert("회원가입 성공");
                     window.location.href = '/member/login';
@@ -71,7 +72,7 @@
 <form action="/member/register" method="post">
     <div class="form-group has-feedback">
         <label class="control-label" >아이디</label>
-        <input class="form-control" type="text" id="id" name="id" />
+        <input class="form-control" type="text" id="username" name="username" />
     </div>
     <div class="form-group has-feedback">
         <label class="control-label">비밀번호</label>
@@ -98,7 +99,6 @@
         <button class="cencle btn btn-danger" type="button" id="cancel">취소</button>
     </div>
 </form>
-
 
 <!-- JS 부트스트랩 적용 -->
 <script

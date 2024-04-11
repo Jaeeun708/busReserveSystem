@@ -6,16 +6,22 @@
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
 <style type="text/css">
+
+    table{
+        height: 100px;
+    }
     th {
         font-weight: bold;
         background: #f4f4f4;
         text-align: left;
         border: 1px solid #ccc;
+        width: 120px;
     }
 
     td {
         border: 1px solid #ccc;
         line-height: 13px;
+        width: 200px;
     }
 
     .card-info {
@@ -27,7 +33,6 @@
     }
 
 </style>
-
 <script>
     $(document).ready(function () {
         // 카드 등록 버튼 클릭 시 카드 정보 입력란 표시
@@ -43,15 +48,15 @@
     <table>
         <tr>
             <th scope="row">아이디</th>
-            <td></td>
+            <td><sec:authentication property="principal.user.id"/></td>
             <th scope="row">이메일</th>
-            <td></td>
+            <td><sec:authentication property="principal.user.email"/></td>
         </tr>
         <tr>
             <th scope="row">이름</th>
-            <td></td>
+            <td><sec:authentication property="principal.user.name"/></td>
             <th scope="row">휴대폰번호</th>
-            <td></td>
+            <td><sec:authentication property="principal.user.phoneNo"/></td>
         </tr>
     </table>
     <h3>자주쓰는 카드</h3>
