@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <!-- jstl -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,22 +33,49 @@
 <!-- <script src="/resources/js/pay.js"></script> -->
 </head>
 <body>
-<!-- header.jsp 시작 -->
-<div id="header">
-	<!-- 상단 메뉴(고정) -->
-	<nav class="navbar navbar-expand-lg fixed-top bg-body-tertiary">
-		<div class="container-fluid">
-			<!-- 로고 -->
-			<a class="navbar-brand" href="../reserve/reserve_main.do"><img src="/resources/img/logo.png"/></a>
-			<!-- 화면 줄어들면 나오는 메뉴 버튼 -->
-			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		  		<span class="navbar-toggler-icon"></span>
-			</button>
-			<!-- 메뉴 -->
-			<div class="collapse navbar-collapse" id="navbarNavDropdown">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="../reserve/reserve_main.do">승차권예매</a></li>
-					<li class="nav-item"><a class="nav-link" href="../reserve/reserve_list.do">조회/변경/취소</a></li>
+<!-- main_wrap 시작 -->
+<div id="main_wrap">
+	<!-- header 시작 -->
+	<div id="header">
+		<div id="header_top_nav">
+			<div id="info_nav">
+				<ul>
+					<!-- 인증된(로그인한) 사용자에게 보임 -->
+					<sec:authorize access="isAuthenticated()">
+						<li>
+							<span class="top_name">
+								<span>
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+										 class="bi bi-person-fill" viewBox="0 0 16 16">
+										<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+									</svg>
+									<sec:authentication property="principal.user.name"/>
+								</span>
+								님 환영합니다.
+							</span>
+						</li>
+					</sec:authorize>
+
+					<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
+					<sec:authorize access="isAnonymous()">
+						<li><a href="/member/login">로그인</a></li>
+						<li><a href="/member/memberjoin">회원가입</a></li>
+					</sec:authorize>
+
+					<!-- 인증된(로그인한) 사용자에게 보임 -->
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="/member/logout">로그아웃</a></li>
+					</sec:authorize>
+
+					<!-- 인증된(MEMBER) 사용자에게 보임 -->
+					<sec:authorize access="hasRole('ROLE_MEMBER')">
+						<li><a href="/mypage/mypage_info">마이페이지</a></li>
+					</sec:authorize>
+
+					<!-- 인증된(ADMIN) 사용자에게 보임 -->
+					<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a href="/manager/manager_info">관리자페이지</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>

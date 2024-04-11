@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -30,7 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .formLogin()
                 .loginPage("/member/login") //사용자가 인증되지 않은 경우 로그인 폼으로 이동
                 .loginProcessingUrl("/login")  //로그인 창에 입력한 데이터 처리
-                .defaultSuccessUrl("/reserve/reserve_main"); //로그인 성공후 이동할 페이지
+                .defaultSuccessUrl("/reserve/reserve_main") //로그인 성공후 이동할 페이지
+
+                .and()
+                .logout()
+                .logoutSuccessUrl("/reserve/reserve_main") // 로그아웃 성공 시 reserve_main 페이지로 리다이렉트
+                .logoutRequestMatcher(new AntPathRequestMatcher("/member/logout")); // 로그아웃 URL
 
     }
 }

@@ -5,9 +5,16 @@ import com.kosta.bus_reserve.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping("/member/*")
@@ -22,6 +29,16 @@ public class MemberController {
     @GetMapping("/login")
     public String login(){
         return "member/login";
+    }
+
+    @GetMapping("/member/logout")
+    public String logout(HttpServletRequest request, HttpServletResponse response){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if(authentication != null){
+            new SecurityContextLogoutHandler().logout(request,response,authentication);
+        }
+        return "redirect:/reserve/reserve_main"; // 로그아웃 성공 후 reserve_main 페이지로 리다이렉트
     }
 
     @GetMapping("/memberjoin")
