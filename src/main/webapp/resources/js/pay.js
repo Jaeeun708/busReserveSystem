@@ -22,36 +22,18 @@ var payInsertService = (function () {
         }); //end ajax
     } //end insert
 
-    function userAndCardInfo(userOrCardInfo, callback, error) {
+    function userAndCardInfo(callback) {
         $.ajax({
-            url: '/pay/mainRegisterPay',
+            url: '/pay/mainRegisterPay/{id}',
             type: 'get',
-            dataType: 'text',
+            dataType: 'application/json; charset=utf-8',
             success: function (result, status, xhr) {
-                if(callback) {
+                if (callback) {
                     callback(result);
                 } // end success if
             } // end success
         }); // end ajax
     } // end userAndCardInfo
-
-
-    // function getList(param, callback, error) {
-    //
-    //     var bno = param.bno;
-    //     var page = param.page || 1;
-    //
-    //     $.getJSON("/replies/pages/" + bno + "/" + page,
-    //         function(data) {
-    //             if (callback) {
-    //                 callback(data);
-    //             }
-    //         }).fail(function(xhr, status, err) {
-    //         if (error) {
-    //             error();
-    //         }
-    //     });
-    // }
 
     return {
         insert: insert,

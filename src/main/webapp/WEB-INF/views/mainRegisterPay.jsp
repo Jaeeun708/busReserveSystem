@@ -8,9 +8,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
+
 <form method="post">
     <input type="hidden" name="payNo" value="${payNo }">
-    <input type="hidden" name="id" value="${id }">
+    <input type="text" name="id" id="userId" value="${id }">
     <input type="hidden" name="amount" value="15000">
     <input type="hidden" name="paymentDate" value="${paymentDate }">
     <input type="hidden" name="payStatus" value="${payStatus }">
@@ -71,9 +72,6 @@
     // 페이지 로드 시 실행
     window.onload = function () {
         addYearsDropdown(); // 현재 년도부터 10년 후까지의 옵션을 추가
-        payInsertService.userAndCardInfo(function (result){
-            console.log("userAjax 성공")
-        })
     };
 
     $("#payInsert").on("click", function(e) {
