@@ -51,4 +51,29 @@ public class ReserveController {
         List<TicketVO> tickets = reserveService.getTicketsByDispatchNo(dispatchNo);
         return tickets;
     }
+
+    @PostMapping("/check-info")  //예매정보를 결제페이지로 넘김.
+    public String checkInfo(@RequestParam String startRegion,
+                            @RequestParam String startTerminal,
+                            @RequestParam String endTerminal,
+                            @RequestParam String endRegion,
+                            @RequestParam String busNo,
+                            @RequestParam String seatNo,
+                            @RequestParam String people,
+                            @RequestParam String departureTime,
+                            @RequestParam String price,
+                            Model model){
+        System.out.println("/check-info 컨트롤러 정상작동 중");
+        System.out.println(startRegion);
+        model.addAttribute("startRegion",startRegion);
+        model.addAttribute("startTerminal",startTerminal);
+        model.addAttribute("endTerminal",endTerminal);
+        model.addAttribute("endRegion",endRegion);
+        model.addAttribute("busNo",busNo);
+        model.addAttribute("seatNo",seatNo);
+        model.addAttribute("people",people);
+        model.addAttribute("departureTime",departureTime);
+        model.addAttribute("price",price);
+        return "payInfo";
+    }
 }

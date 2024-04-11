@@ -199,7 +199,7 @@
 			$('#destinationTerminal').empty();
 		});//end $('.btn-secondary').click
 
-		$('.btn-primary').click(function () {  //저장 버튼
+		$('#myModal .btn-primary').click(function () {  //저장 버튼
 			var startPoint = $('div[name="startLayer"] .terminal-link.choiced').text();
 			var endPoint = $('div[name="endLayer"] .terminal-link.choiced').text();
 			console.log(startPoint);//test
@@ -425,19 +425,57 @@
 
 				var busNo= busNo.match(/\d+/)[0];
 				var departureTime =  departureTime.match(/(.*)/)[1].trim();
+				var people = 1;
+				var price = 1000000;
+				var priceFormatted = price.toLocaleString(); // 가격을 천 단위마다 쉼표를 포함한 문자열로 변환
 
 				var modalContent = "<p><strong>출발지:</strong>[" + startRegion + "]" + startTerminal + "</p>" +
 						"<p><strong>도착지:</strong>[" + endRegion + "]" + endTerminal + "</p>" +
 						"<p><strong>버스 번호:</strong> " + busNo + "</p>" +
 						"<p><strong>좌석:</strong> " + seatNo + " 번</p>" +
-						"<p><strong>인원:</strong> 1명</p>" +
+						"<p><strong>인원:</strong>" +people + "명</p>" +
 						"<p><strong>출발 일시:</strong> " + departureTime + "</p>"+
-						"<p><strong>금액:</strong> 1,000,000 원</p>";
+						"<p><strong>금액:</strong> "+priceFormatted+"원</p>";
 
 				// 모달 내용 업데이트
 				$('#seatInfoModal .modal-body').html(modalContent);
 				// 모달 표시
 				$('#seatInfoModal').modal('show');
+
+				$('#seatInfoModal .btn-primary').click(function(){
+					// 폼 데이터를 객체로 만듭니다.
+					var formData = {
+						startRegion: startRegion,
+						startTerminal: startTerminal,
+						endTerminal: endTerminal,
+						endRegion: endRegion,
+						busNo: busNo,
+						seatNo: seatNo,
+						people: people,
+						departureTime: departureTime,
+						price: price
+					};
+
+					// 폼 엘리먼트를 생성하고 값을 설정합니다.
+					var form = document.createElement("form");
+					form.setAttribute("method", "POST");
+					form.setAttribute("action", "/reserve/check-info");
+
+					// 폼 데이터를 폼에 추가합니다.
+					for (var key in formData) {
+						if (formData.hasOwnProperty(key)) {
+							var input = document.createElement("input");
+							input.setAttribute("type", "hidden");
+							input.setAttribute("name", key);
+							input.setAttribute("value", formData[key]);
+							form.appendChild(input);
+						}
+					}
+
+					// body에 폼을 추가하고 제출합니다.
+					document.body.appendChild(form);
+					form.submit();
+				});
 			}else{
 				return;
 			}
