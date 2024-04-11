@@ -1,6 +1,5 @@
 package com.kosta.bus_reserve.controller;
 
-import com.kosta.bus_reserve.domain.MyCardVO;
 import com.kosta.bus_reserve.domain.PayDTO;
 import com.kosta.bus_reserve.domain.UserVO;
 import com.kosta.bus_reserve.service.PayService;
@@ -16,6 +15,7 @@ public class PayRestController {
 
     private PayService service;
 
+    //결제정보를 입력하는 메서드
     @PostMapping("mainRegisterPay")
     public ResponseEntity<String> create(@RequestBody PayDTO dto) {
 
@@ -32,5 +32,27 @@ public class PayRestController {
     public UserVO infos(@PathVariable String id) {
         return service.userAndCardInfo(id);
     }
+
+    //회원정보를 가져오는 메서드
+//    @GetMapping("mainRegisterPay/{id}")
+//    public ResponseEntity<UserVO> getUserAndCardInfo(@PathVariable String id) {
+//        UserVO userVO = service.userAndCardInfo(id);
+//
+//        if (userVO != null) {
+//            System.out.println("restController userVO");
+//            return ResponseEntity.ok(userVO);
+//        } else {
+//            return ResponseEntity.notFound().build();
+//        }
+//    }
+
+//    @GetMapping("mainRegisterPay/{id}")
+//    public String mainRegisterPay(@PathVariable(required = false) String id) {
+//        if (id != null) {
+//            return "mainRegisterPay" + id;
+//        } else {
+//            return "mainRegisterPay";
+//        }
+//    }
 
 }
