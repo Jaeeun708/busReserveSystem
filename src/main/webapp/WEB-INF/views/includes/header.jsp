@@ -26,10 +26,10 @@
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <!-- CSS(공통) -->
 <link rel="stylesheet" href="/resources/css/busStyle.css" type="text/css">
-
 <!-- 자바스크립트 부분(개인) -->
 <script src="/resources/js/manager.js"></script>
 <script src="/resources/js/reserve.js"></script>
+
 <!-- <script src="/resources/js/pay.js"></script> -->
 </head>
 <body>
@@ -78,6 +78,13 @@
 					</sec:authorize>
 				</ul>
 			</div>
+			<div id="logo"><img src="/resources/img/logo2.png"/></div>
+			<div id="menu_nav">
+				<ul>
+					<li>승차권예매</li>
+					<li>조회/변경/취소</li>
+				</ul>
+			</div>
 		</div>
-	</nav>
+	</div>
 </div>
