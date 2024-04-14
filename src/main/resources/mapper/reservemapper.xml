@@ -56,4 +56,14 @@
         select * from ticket where dispatch_no = #{dispatchNo}
     </select>
 
+<!--  유저아이디로 기존 이용 터미널 찾기  -->
+    <select id ="getRecordsByUserId" resultMap="dispatchResultMap" parameterType="java.lang.String">
+        select di.dispatch_no, di.bus_no, tm.terminal_name as start_terminal, tm2.terminal_name as end_terminal, tm.region as start_region, tm2.region as end_region
+        from (((ticket tk join dispatch_info di on tk.dispatch_no = di.dispatch_no)
+            join terminal tm on di.start_point = tm.terminal_no)
+            join terminal tm2 on di.end_point = tm2.terminal_no)
+        where tk.id = #{userId}
+    </select>
+
+
 </mapper>

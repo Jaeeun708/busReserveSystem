@@ -25,9 +25,9 @@ public class ReserveController {
 
     @GetMapping("reserve_main")
     public String getTerminalList(Model model) {
-        System.out.println("service: " + reserveService);
+        //System.out.println("service: " + reserveService);
         List<TerminalVO> terminals = reserveService.getTerminalList(); // Service에서 List<TerminalVO>를 가져옴
-        System.out.println(terminals); //test
+        //System.out.println(terminals); //test
         model.addAttribute("terminals", terminals);// View에 List<TerminalVO>를 전달
         return "reserve/reserve_main"; //reserve_main.jsp
     }
@@ -63,8 +63,8 @@ public class ReserveController {
                             @RequestParam String departureTime,
                             @RequestParam String price,
                             Model model){
-        System.out.println("/check-info 컨트롤러 정상작동 중");
-        System.out.println(startRegion);
+        //System.out.println("/check-info 컨트롤러 정상작동 중");
+        //System.out.println(startRegion);
         model.addAttribute("startRegion",startRegion);
         model.addAttribute("startTerminal",startTerminal);
         model.addAttribute("endTerminal",endTerminal);
@@ -75,5 +75,13 @@ public class ReserveController {
         model.addAttribute("departureTime",departureTime);
         model.addAttribute("price",price);
         return "payInfo";
+    }
+
+    @PostMapping("/pre-used-terminal")
+    @ResponseBody
+    public List<SearchedDispatch> getPreUsedTerminals(@RequestParam String userId){
+        //사용자 이름으로 기존에 이용했던 터미널 찾기.
+        List<SearchedDispatch> recordList = reserveService.getRecordsByUserId(userId);
+        return recordList;
     }
 }

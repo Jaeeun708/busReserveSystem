@@ -19,4 +19,7 @@ public interface ReserveMapper {
 
     //배차번호로 해당 배차번호에 맞는 티켓들만 가져오기.
     public List<TicketVO> getTickets(int dispatchNo);
+
+    //사용자 id로 기존에 예약했던 노선리스트 불러오기
+    public List<SearchedDispatch> getRecordsByUserId(String userId);
 }
