@@ -58,7 +58,7 @@ public class ReserveController {
                             @RequestParam String endTerminal,
                             @RequestParam String endRegion,
                             @RequestParam String busNo,
-                            @RequestParam String seatNo,
+                            @RequestParam String[] seatNo,  //배열로 받음.
                             @RequestParam String people,
                             @RequestParam String departureTime,
                             @RequestParam String price,
@@ -74,6 +74,7 @@ public class ReserveController {
         model.addAttribute("people",people);
         model.addAttribute("departureTime",departureTime);
         model.addAttribute("price",price);
+        System.out.println(model);
         return "reserve/reserve_login";
     }
 
