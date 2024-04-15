@@ -288,11 +288,11 @@ div.bg-white{
 	color: #000000;
 	font-size: 25px;
 	text-align: center;
-	margin-bottom:30px;
+	margin-bottom:10px;
 }
 .myInfo, .myCardInfo, .myCardInsert{
 	width: 40%;
-	margin: 20px auto;
+	margin: 0 auto;
 }
 .myInfo tr,.myInfo td,.myInfo th,
 .myCardInfo tr,.myCardInfo td, .myCardInfo th,
@@ -398,4 +398,16 @@ div.bg-white{
 }
 #dateTimeInput{
 	width:230px;
+}
+/*결제내역페이지*/
+#manager_payment_content1{
+	padding:50px;
+	float: left;
+}
+#manager_payment_content1 > .content_title{
+	font-size: 25px;
+	color:#000000;
+}
+.content_title>i{
+	margin-right: 5px;
 }
