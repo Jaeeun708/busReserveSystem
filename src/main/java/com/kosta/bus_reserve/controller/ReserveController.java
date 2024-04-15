@@ -74,6 +74,6 @@ public class ReserveController {
         model.addAttribute("people",people);
         model.addAttribute("departureTime",departureTime);
         model.addAttribute("price",price);
-        return "payInfo";
+        return "reserve/reserve_login";
     }
 }
