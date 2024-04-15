@@ -15,7 +15,7 @@
     <button type="submit">로그인</button>
 </form>
 
-<form id="myForm" method="post" onsubmit="return testDataForm()">
+<form id="myForm" method="post">
     <input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" pattern="[0-9]{8}">
     <br>
     <select id="phoneDropdown" onchange="updatePhoneNo()">
@@ -28,8 +28,8 @@
     </select> -
     <input type="text" id="phoneNo1" placeholder="핸드폰번호" maxlength="4" pattern="[0-9]{4}" oninput="updatePhoneNo()"> -
     <input type="text" id="phoneNo2" placeholder="핸드폰번호" maxlength="4" pattern="[0-9]{4}" oninput="updatePhoneNo()">
-    <input type="hidden" name="allPhoneNo" id="phoneNo3" onchange="updatePhoneNo()">
-    <button type="submit">제출</button>
+    <input type="hidden" name="phoneNo" id="phoneNo3">
+    <button type="button" onclick="submitForm()">제출</button>
 </form>
 
 </body>
@@ -70,6 +70,13 @@
         return true;
     }
 
+    // 폼 제출
+    function submitForm() {
+        if (testDataForm()) {
+            document.getElementById("myForm").submit();
+        }
+    }
+
     // 드롭다운에서 선택된 값을 핸드폰번호 첫번째에 반영
     function updatePhoneNo() {
         var phoneDropdown = document.getElementById("phoneDropdown").value;
@@ -80,16 +87,6 @@
         // hidden input에 전화번호 설정
         document.getElementById("phoneNo3").value = phoneNo;
     }
-
-    // memberForm 제출 시
-    // document.getElementById("memberForm").addEventListener("submit", function(event) {
-    //     event.preventDefault(); // 기본 제출 동작 방지
-    //
-    //     var userId = document.getElementById("userId").value;
-    //
-    //     // URL에 id 파라미터 추가하여 다른 페이지로 이동
-    //     window.location.href = "mainRegisterPay/" + encodeURIComponent(userId);
-    // });
 
 </script>
 </html>
