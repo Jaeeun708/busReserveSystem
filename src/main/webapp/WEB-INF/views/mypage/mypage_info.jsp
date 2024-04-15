@@ -5,26 +5,27 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
+<!-- side -->
+<%@include file="../includes/mypageSide.jsp"%>
 
 <!-- mypage_info 시작 -->
 <div id="mypage_info_content1">
-    <div class="content_title">회 원 정 보
-        <div class="myInfo">
-            <table>
-                <tr>
-                    <th scope="row">아이디</th>
-                    <td><sec:authentication property="principal.user.id"/></td>
-                    <th scope="row">이메일</th>
-                    <td><sec:authentication property="principal.user.email"/></td>
-                </tr>
-                <tr>
-                    <th scope="row">이름</th>
-                    <td><sec:authentication property="principal.user.name"/></td>
-                    <th scope="row">휴대폰번호</th>
-                    <td><sec:authentication property="principal.user.phoneNo"/></td>
-                </tr>
-            </table>
-        </div>
+    <div class="content_title"><i class="fa-solid fa-circle-user title_icon"></i>회원정보</div>
+    <div class="myInfo">
+        <table>
+            <tr>
+                <th scope="row">아이디</th>
+                <td><sec:authentication property="principal.user.id"/></td>
+                <th scope="row">이메일</th>
+                <td><sec:authentication property="principal.user.email"/></td>
+            </tr>
+            <tr>
+                <th scope="row">이름</th>
+                <td><sec:authentication property="principal.user.name"/></td>
+                <th scope="row">휴대폰번호</th>
+                <td><sec:authentication property="principal.user.phoneNo"/></td>
+            </tr>
+        </table>
     </div>
 </div>
 <!-- mypage_info1 끝 -->

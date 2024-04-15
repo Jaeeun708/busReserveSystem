@@ -59,10 +59,11 @@ public class ReserveController {
                             @RequestParam String endTerminal,
                             @RequestParam String endRegion,
                             @RequestParam String busNo,
-                            @RequestParam String seatNo,
+                            @RequestParam String[] seatNo,  //배열로 받음.
                             @RequestParam String people,
                             @RequestParam String departureTime,
                             @RequestParam String price,
+
                             HttpSession session) {
         session.setAttribute("startRegion", startRegion);
         session.setAttribute("startTerminal", startTerminal);
@@ -74,6 +75,7 @@ public class ReserveController {
         session.setAttribute("departureTime", departureTime);
         session.setAttribute("price", price);
         return "redirect:reserve_login";
+
     }
 
     @PostMapping("/pre-used-terminal")
