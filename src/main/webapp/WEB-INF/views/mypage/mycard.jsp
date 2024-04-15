@@ -5,6 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
+<!-- side -->
+<%@include file="../includes/mypageSide.jsp"%>
+
 <!-- 자바 스크립트 -->
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">
@@ -38,48 +41,47 @@
 </script>
 
 <div id="mycard_info_content">
-    <div class="content_title">자주쓰는 카드
-        <div class="myCardInfo">
-            <!-- 카드 정보가 없는 경우 -->
-            <c:if test="${empty myCardInfo}">
-                <button type="button" id="insertMyCard">등록</button>
-                <table>
-                    <tr>
-                        <th scope="row">아이디</th>
-                        <td><sec:authentication property="principal.user.id"/></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">카드 이름</th>
-                        <td>카드가 등록되어 있지 않습니다.</td>
+    <div class="content_title"><i class="fa-regular fa-credit-card"></i>자주쓰는 카드</div>
+    <div class="myCardInfo">
+        <!-- 카드 정보가 없는 경우 -->
+        <c:if test="${empty myCardInfo}">
+            <button type="button" id="insertMyCard">등록</button>
+            <table>
+                <tr>
+                    <th scope="row">아이디</th>
+                    <td><sec:authentication property="principal.user.id"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">카드 이름</th>
+                    <td>카드가 등록되어 있지 않습니다.</td>
 
-                    </tr>
-                    <tr>
-                        <th scope="row">카드 번호</th>
-                        <td>0000-****-****-0000</td>
-                    </tr>
-                </table>
-            </c:if>
-            <!-- 카드 정보가 있는 경우 -->
-            <c:if test="${not empty myCardInfo}">
-                <button type="button" id="updateMyCard">수정</button>
-                <button type="button" id="deleteMyCard">삭제</button>
-                <table>
-                    <tr>
-                        <th scope="row">아이디</th>
-                        <td><sec:authentication property="principal.user.id"/></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">카드 이름</th>
-                        <td><c:out value="${myCardInfo.cardName}"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">카드 번호</th>
+                    <td>0000-****-****-0000</td>
+                </tr>
+            </table>
+        </c:if>
+        <!-- 카드 정보가 있는 경우 -->
+        <c:if test="${not empty myCardInfo}">
+            <button type="button" id="updateMyCard">수정</button>
+            <button type="button" id="deleteMyCard">삭제</button>
+            <table>
+                <tr>
+                    <th scope="row">아이디</th>
+                    <td><sec:authentication property="principal.user.id"/></td>
+                </tr>
+                <tr>
+                    <th scope="row">카드 이름</th>
+                    <td><c:out value="${myCardInfo.cardName}"/></td>
 
-                    </tr>
-                    <tr>
-                        <th scope="row">카드 번호</th>
-                        <td id="cardNumber"><c:out value="${myCardInfo.cardNo}"/></td>
-                    </tr>
-                </table>
-            </c:if>
-        </div>
+                </tr>
+                <tr>
+                    <th scope="row">카드 번호</th>
+                    <td id="cardNumber"><c:out value="${myCardInfo.cardNo}"/></td>
+                </tr>
+            </table>
+        </c:if>
     </div>
 </div>
 <!-- JS 부트스트랩 적용 -->

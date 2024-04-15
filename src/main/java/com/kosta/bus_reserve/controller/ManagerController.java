@@ -4,6 +4,8 @@ import com.kosta.bus_reserve.domain.DispatchVO;
 import com.kosta.bus_reserve.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -43,11 +45,10 @@ public class ManagerController {
 //    }
 
     // 삭제 요청을 처리하는 핸들러
+    //(초(0-59), 분(0-59), 시간(0-23), 일(1-31), 월(1-12), 요일(1-7, 1:일, 7:토))
+    //@Scheduled(cron = "* * * * * *")//cron:원하는 시간대를 설정하여 작업을 실행
     @PostMapping("/delete")
     public ResponseEntity<String> deleteDispatch(@RequestParam("dispatchNo") int dispatchNo) {
-        // 여기서는 단순히 dispatchNo를 사용하여 삭제를 수행한다고 가정합니다.
-        // dispatch 삭제 로직을 구현해야 합니다. (예를 들어, dispatchNo를 가지고 DB에서 삭제하는 등)
-        // 이 예시에서는 단순히 성공 여부만 반환합니다.
         if (dispatchNo > 0) {
             service.deleteDispatch(dispatchNo);
             // 성공적으로 삭제되었다는 응답 반환

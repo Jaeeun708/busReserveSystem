@@ -4,59 +4,108 @@
 	margin:0px;
 	padding:0px;
 }
+html, body {/*footer설정*/
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+/*body 전체*/
+body {
+	font-family: "IBM Plex Sans KR", sans-serif;
+	font-weight: bold;
+	background: #F9F9F9;
+	display: flex;/*footer설정*/
+	flex-direction: column;/*footer설정*/
+	min-height: 100vh;/*footer설정*/
+}
+/*전체 컨텐츠 영역 70%*/
+#content_wrap {
+	width: 70%;
+	margin:0 auto;
+}
+/*a, li태그 기본스타일 없애기*/
+a {
+	text-decoration: none;
+	color: inherit;
+}
+li{
+	list-style-type: none;
+}
 
+/*header레이아웃*/
 #header {
 	width: 100%;
 	height: 80px;
 	position: fixed; /* 화면 상단에 고정 */
 	top: 0; /* 화면의 맨 위에 배치 */
 	z-index: 9999; /* 다른 요소보다 위에 표시 */
-	background-color: #f2f2f2;
+	background-color: #ffffff;
+	border-bottom: 1px solid #E2E2E2;
 }
-
-#main_wrap {
-	margin-top: 90px; /* 메인 컨텐츠가 헤더 아래에 표시되도록 마진 설정 */
+#header_top_nav{
+	width: 70%;
+	margin: 0 auto;
 }
-#info_nav {
-	position: absolute;
-	right: 20px;
+#content_wrap{
+	flex: 1;
 }
-#logo {
-	margin-top: 5px;
+/*footer레이아웃*/
+#footer {
+	width: 100%;
+	z-index: 100;
+	background-color: #ffffff;
+	border-top: 1px solid #E2E2E2;
+	font-size: 14px;
+	color: #6B6B6B;
+	height: 110px;
+}
+#footer_content1{
+	width: 70%;
+	margin: 0 auto;
+}
+.footer_nav{
+	padding: 15px 0 15px 0;
+}
+.footer_nav>li{
 	float: left;
-	height: 50px;
+	padding:0 10px;
+	border-left: 2px solid gray;
+}
+.footer_nav>li:first-child{
+	border:0px;
+	padding-left: 0px;
+}
+#footer_content1 .footer_info{
+	clear: both;
+}
+/*로그인, 회원가입 nav*/
+#info_nav {
+	right: 20px;
+	float: right;
 }
 #info_nav>ul>li {
 	float: left;
 	margin-left: 10px;
 	font-weight: bold;
-	font-family: "IBM Plex Sans KR", sans-serif;
 	font-size: 16px;
 }
 #info_nav>ul>li>a{
 	text-decoration: none;
 	color: #000000;
 }
-
+/*로고*/
+#logo {
+	float: left;
+	padding-left:13px;
+}
+/*승차권예매, 조회/변경/취소 nav*/
 #menu_nav>ul>li {
 	float: left;
-	margin-top: 15px;
 	margin-left: 25px;
-	font-size: 23px;
-	font-weight: bold;
-	font-family: "IBM Plex Sans KR", sans-serif;
-}
-
-ul{
-	list-style-type: none;
-}
-
-
-body {
-	font-family: "IBM Plex Sans KR", sans-serif;
+	line-height: 45px;
+	font-size: 21px;
 	font-weight: bold;
 }
-/*header*/
 .navbar{
 	background-color:#68B3CE !important;
 }
@@ -65,33 +114,32 @@ a.nav-link{
 	font-size:20px;
 	color:#ffffff;
 }
-/*a태그 기본스타일 없애기*/
-a {
-	text-decoration: none;
-	color: inherit;
-}
+
 /*메인css*/
 /*조회 부분 가운데 정렬*/
 #reserve_search{
-	width:70%;
+	margin-top: 120px;
+	width:90%;
 	position: relative;
 	left: 50%;
+	padding-top: 20px;
 	transform: translateX(-50%);
-	width: 75%;
 	clear: both !important;
 }
 /*메인페이지 조회부분 content*/
 #reserve_content1{
-	padding-top:70px;
 	padding-bottom:40px;
-	width:100%;
 	background-color: #68B3CE;
+	margin: 0 auto;
 }
 /*content 제목*/
 .content_title{
 	color:#ffffff;
 	font-size:20px;
 	margin:10px 0;
+}
+.content_title>i{
+	margin-right: 5px;
 }
 /* 아이콘*/
 i.title_icon{
@@ -108,6 +156,7 @@ button.nav-link{
 /*편도, 왕복 탭 클릭시 하단 부분*/
 #myTabContent
 {
+	width: 100%;
 	height:150px;
 	border-radius: 0 10px 10px 10px;
 	background-color:#ffffff;
@@ -130,6 +179,9 @@ button.nav-link{
 	margin-top:20px;
 }
 /*출발지, 도착지 modal 레이아웃*/
+.reserve.modal-content{
+	margin-top: 120px;
+}
 .modal-xl {
 	--bs-modal-width:800px;
 }
@@ -177,7 +229,6 @@ div[name="endLayer"]{
 }
 /*배차조회 테이블*/
 #reserve_content2{
-	width:75%;
 	margin: 0 auto;
 }
 .dispatchTitle{
@@ -236,12 +287,18 @@ div[name="endLayer"]{
 	font-size: 14px; /* 숫자의 크기 설정 */
 	color: black; /* 숫자의 색상 설정 */
 }
+/*예매정보모달창*/
+#seatInfoModal{
+	margin-top: 90px;
+}
 
 /*로그인 페이지*/
-.login_content1{
-	padding-top:80px;
+.container{
+	margin-top:90px;
+	padding-bottom: 30px;
 }
 div.bg-white{
+	margin: 0 auto;
 	width:550px;
 }
 .justify-content-md-center{
@@ -254,11 +311,11 @@ div.bg-white{
 }
 /*회원가입 페이지*/
 #join_content1{
-	padding-top:80px;
 	width:30%;
 	margin: 0 auto;
 }
 #join_content1 .content_title{
+	margin-top:130px;
 	color: #000000;
 	font-size:20px;
 	font-family: "IBM Plex Sans KR", sans-serif;
@@ -272,27 +329,31 @@ div.bg-white{
 #join_content1 .form-group .btn{
 	background: #68B3CE;
 	color: black;
-	border: 1px solid;
+	border: 1px solid #68B3CE;
 	font-weight: bold;
 	float: right;
 	margin-right: 10px;
 }
 
-/*마이페이지*/
-/*회원정보*/
-#mypage_info_content1, mycard_info_content, mycard_insert_content{
-	margin-top:90px;
-	margin-bottom:30px;
+/*마이페이지_회원정보*/
+#mypage_info_content1, #mycard_info_content, #mycard_insert_content{
+	width: 80%;
+	float: left;
+	padding-top:115px;
+	margin-bottom:20px;
 }
 #mypage_info_content1>.content_title, #manager_info_content1>.content_title{
 	color: #000000;
 	font-size: 25px;
 	text-align: center;
-	margin-bottom:10px;
+}
+.content_title>.fa-credit-card{
+	padding-right: 5px;
 }
 .myInfo, .myCardInfo, .myCardInsert{
-	width: 40%;
+	width: 70%;
 	margin: 0 auto;
+	text-align: center;
 }
 .myInfo tr,.myInfo td,.myInfo th,
 .myCardInfo tr,.myCardInfo td, .myCardInfo th,
@@ -311,12 +372,12 @@ div.bg-white{
 	width: 250px;
 }
 
-/*자주 쓰는 카드*/
+/*마이페이지_자주 쓰는 카드*/
 #mycard_info_content>.content_title, #mycard_insert_content>.content_title {
 	color: #000000;
 	font-size: 25px;
 	text-align: center;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
 }
 .myCardInfo table, .myCardInsert table {
 	width: 100%;
@@ -332,15 +393,19 @@ div.bg-white{
 	margin-left: 10px;
 }
 .myCardInsert #mycardName{
-	width: 600px;
+	width: 380px;
 }
 
 .myCardInsert input{
-	width: 130px;
+	width: 80px;
+}
+#insertMyCard{
+	border: 1px solid ;
 }
 
 /*관리자페이지*/
 #manager_info_content1{
+	padding-top: 120px;
 	color: #000000;
 	font-size: 25px;
 	text-align: center;
@@ -353,21 +418,22 @@ div.bg-white{
 #side{
 	width:20%;
 	float:left;
-	margin-top:90px;
-	padding:20px 0 40px 20px;
-	border-right: 2px solid #68B3CE;
+	height: 100vh;
+	padding:125px 0 50px 20px;
+	background: #68B3CE;
 }
 #side a{
-	color:#000000;
+	color:#ffffff;
 	font-size: 19px;
 }
 /*관리자페이지 배차관리*/
 #manager_route_content1{
-	margin-top:70px;
-	width:80%;
+	margin-top:120px;
 	padding:0 50px 50px 50px;
 	float: left;
+	width: 80%;
 }
+
 #manager_route_content1>.content_title{
 	font-size:25px;
 	color:#000000;
@@ -376,7 +442,8 @@ div.bg-white{
 .modal-title{
 	font-weight: bold;
 }
-.modal-content{
+#manager_route_content1>.modal-content{
+	margin-top: 120px;
 	width:520px;
 }
 #dispatchModal .select_title{
@@ -401,13 +468,13 @@ div.bg-white{
 }
 /*결제내역페이지*/
 #manager_payment_content1{
-	padding:50px;
+	width: 80%;
+	margin-top: 120px;
+	padding:0 50px 50px 50px;
 	float: left;
 }
 #manager_payment_content1 > .content_title{
 	font-size: 25px;
 	color:#000000;
 }
-.content_title>i{
-	margin-right: 5px;
-}
+

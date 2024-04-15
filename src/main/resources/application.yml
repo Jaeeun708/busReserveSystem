@@ -10,7 +10,7 @@ spring:
     driver-class-name: oracle.jdbc.driver.OracleDriver
     url: jdbc:oracle:thin:@localhost:1521:XE
 
-    username: bus1234
+    username: final
     password: 1234
 
   mvc:
