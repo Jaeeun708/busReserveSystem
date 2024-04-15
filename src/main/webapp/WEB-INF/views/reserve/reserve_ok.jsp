@@ -10,8 +10,23 @@
 
 	<!-- ticket_ok_content1 시작 -->
 	<div id="ticket_ok_content1">
-		ticket_ok_content 추가 부분
+		<!-- 예매 정보 출력 -->
+		<label>Start Region: ${startRegion}</label><br>
+		<label>Start Terminal: ${startTerminal}</label><br>
+		<label>End Region: ${endRegion}</label><br>
+		<label>End Terminal: ${endTerminal}</label><br>
+		<label>Departure Time: ${departureTime}</label><br>
+		<label>Bus No: ${busNo}</label><br>
+		<label>Seat No: ${seatNo}</label><br>
+		<label>Price: ${price}</label><br>
+
+		<!-- 결제 정보 출력 -->
+		<label>People: ${people}</label><br>
+		<label>Purchase: ${people}</label><br>
+		<label>Price: ${price}</label><br>
+
 	</div>
+
 	<!-- ticket_ok_content1 끝 -->
 	
 <!-- JS 부트스트랩 적용 -->

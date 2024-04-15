@@ -5,6 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
+<!-- side -->
+<%@include file="../includes/mypageSide.jsp"%>
 
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">

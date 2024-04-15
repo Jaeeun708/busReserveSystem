@@ -20,11 +20,12 @@
         <association property="myCardVO" javaType="com.kosta.bus_reserve.domain.MyCardVO">
             <id property="id" column="card_id"/>
             <result property="cardNo" column="card_no"/>
+            <result property="cardName" column="card_name"/>
         </association>
     </resultMap>
 
     <select id="selectUserInfoAndCard" resultMap="userAndCardMap">
-        select u.id, u.birth, u.phone_no, m.card_no
+        select u.id, u.birth, u.phone_no, m.card_no, m.card_name
         from user_info u, mycard m
         where u.id = #{id}
           and u.id = m.id(+)

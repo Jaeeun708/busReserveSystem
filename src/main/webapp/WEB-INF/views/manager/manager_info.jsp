@@ -5,7 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<%@include file="../includes/side.jsp"%>
+<!-- side -->
+<%@include file="../includes/managerSide.jsp"%>
+
 <div id="manager_info_content1">
     <!-- 큰제목 -->
     <div class="content_title"><i class="fa-solid fa-circle-user title_icon"></i>관리자 정보</div>
@@ -23,7 +25,6 @@
                 <td><sec:authentication property="principal.user.phoneNo"/></td>
             </tr>
         </table>
-
 </div>
 
     <!-- JS 부트스트랩 적용 -->

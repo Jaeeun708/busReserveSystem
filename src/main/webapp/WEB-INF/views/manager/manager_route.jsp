@@ -5,20 +5,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<%@include file="../includes/side.jsp"%>
+<!-- side -->
+<%@include file="../includes/managerSide.jsp"%>
+
 <!-- manager_route2 시작 -->
 <div id="manager_route_content1">
 	<!-- 큰제목 -->
 	<div class="content_title"><i class="fa-solid fa-bus-simple title_icon"></i>배차관리</div>
 	<table id="dispatch_list" class="table table-hover">
 		<thead>
-		<tr>
-			<th>배차번호</th>
-			<th>버스번호</th>
-			<th>출발지</th>
-			<th>도착지</th>
-			<th colspan="2">출발일시</th>
-		</tr>
+			<tr>
+				<th>배차번호</th>
+				<th>버스번호</th>
+				<th>출발지</th>
+				<th>도착지</th>
+				<th colspan="2">출발일시</th>
+			</tr>
 		</thead>
 		<tbody>
 		<c:forEach items="${dispatchList}" var="dispatch">
@@ -40,21 +42,6 @@
 					var minute = splitTime[1];
 					element.textContent = hour + ':' + minute;
 				});
-
-
-				//삭제
-				// document.addEventListener('DOMContentLoaded', function() {
-				// 	// .removeBtn을 클릭했을 때 실행될 함수
-				// 	var removeButtons = document.querySelectorAll('.removeBtn');
-				// 	removeButtons.forEach(function(button) {
-				// 		button.addEventListener('click', function() {
-				// 			// 삭제할 dispatchNo 값 가져오기
-				// 			var dispatchNo = this.parentElement.parentElement.querySelector('.dispatchNo').textContent;
-				// 			// AJAX 요청 보내기
-				// 			deleteDispatch(dispatchNo);
-				// 		});
-				// 	});
-				// });
 
 				// 삭제 버튼 클릭 시 실행될 함수
 				document.getElementById('removeBtn').addEventListener('click', function() {
@@ -103,84 +90,86 @@
 </div>
 <!-- manager_route2 끝 -->
 
-<!-- 배차등록 모달페이지 -->
-<!-- 배차 등록 창 시작 -->
-<div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog"
-	 aria-labelledby="exampleModalLabel" aria-hidden="true">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h1 class="modal-title fs-5" id="exampleModalLabel">배차등록</h1>
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			</div>
-			<div class="modal-body">
-				<form>
-					<input type="hidden" id="dispatchNo" name="dispatchNo"/>
-					<div class="route_select">
-						<p class="select_title">버스번호</p>
-						<select id="busNumberSelect" class="form-select" name="busNumberSelect"
-								aria-label="Default select example">
-							<option selected disabled>버스번호선택</option>
-							<c:forEach items="${busList}" var="bus">
-								<option><c:out value="${bus.busNo}" /></option>
+<!-- manager_route_content2 -->
+<div id= "manager_route_content2">
+	<!-- 배차 등록 창 시작 -->
+	<div class="modal fade" id="dispatchModal" tabindex="-1" role="dialog"
+		 aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">배차등록</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form>
+						<input type="hidden" id="dispatchNo" name="dispatchNo"/>
+						<div class="route_select">
+							<p class="select_title">버스번호</p>
+							<select id="busNumberSelect" class="form-select" name="busNumberSelect"
+									aria-label="Default select example">
+								<option selected disabled>버스번호선택</option>
+								<c:forEach items="${busList}" var="bus">
+									<option><c:out value="${bus.busNo}" /></option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="route_select">
+							<p class="select_title">출발지</p>
+							<select id="departureRegionSelect" class="form-select"
+									aria-label="Default select example">
+								<option selected>지역선택</option>
+								<c:forEach items="${region}" var="region">
+									<option value="${region}"><c:out value="${region}" /></option>
+								</c:forEach>
+							</select> <select id="departureTerminalSelect" class="form-select"
+											  aria-label="Default select example"
+											  name="departureTerminalSelect">
+							<option selected>터미널선택</option>
+							<c:forEach items="${terminalList}" var="terminalManager">
+								<option value="${terminalManager.terminalName}"
+										data-region="${terminalManager.region}" style="display: none;">
+									<c:out value="${terminalManager.terminalName}" /></option>
 							</c:forEach>
 						</select>
-					</div>
-					<div class="route_select">
-						<p class="select_title">출발지</p>
-						<select id="departureRegionSelect" class="form-select"
-								aria-label="Default select example">
-							<option selected>지역선택</option>
-							<c:forEach items="${region}" var="region">
-								<option value="${region}"><c:out value="${region}" /></option>
+						</div>
+						<div class="route_select">
+							<p class="select_title">도착지</p>
+							<select id="destinationRegionSelect" class="form-select"
+									aria-label="Default select example">
+								<option selected>지역선택</option>
+								<c:forEach items="${region}" var="region">
+									<option value="${region}"><c:out value="${region}" /></option>
+								</c:forEach>
+							</select> <select id="destinationTerminalSelect" class="form-select"
+											  aria-label="Default select example"
+											  name="destinationTerminalSelect">
+							<option selected>터미널선택</option>
+							<c:forEach items="${terminalList}" var="terminalManager">
+								<option value="${terminalManager.terminalName}"
+										data-region="${terminalManager.region}" style="display: none;">
+									<c:out value="${terminalManager.terminalName}" /></option>
 							</c:forEach>
-						</select> <select id="departureTerminalSelect" class="form-select"
-										  aria-label="Default select example"
-										  name="departureTerminalSelect">
-						<option selected>터미널선택</option>
-						<c:forEach items="${terminalList}" var="terminalManager">
-							<option value="${terminalManager.terminalName}"
-									data-region="${terminalManager.region}" style="display: none;">
-								<c:out value="${terminalManager.terminalName}" /></option>
-						</c:forEach>
-					</select>
-					</div>
-					<div class="route_select">
-						<p class="select_title">도착지</p>
-						<select id="destinationRegionSelect" class="form-select"
-								aria-label="Default select example">
-							<option selected>지역선택</option>
-							<c:forEach items="${region}" var="region">
-								<option value="${region}"><c:out value="${region}" /></option>
-							</c:forEach>
-						</select> <select id="destinationTerminalSelect" class="form-select"
-										  aria-label="Default select example"
-										  name="destinationTerminalSelect">
-						<option selected>터미널선택</option>
-						<c:forEach items="${terminalList}" var="terminalManager">
-							<option value="${terminalManager.terminalName}"
-									data-region="${terminalManager.region}" style="display: none;">
-								<c:out value="${terminalManager.terminalName}" /></option>
-						</c:forEach>
-					</select>
-					</div>
-					<div class="route_select">
-						<p class="select_title" style="width: 90px">출발일시</p>
-						<input class="form-control" type="datetime-local" id="dateTimeInput" name="dateTimeInput"><br>
-						<br>
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-				<button type="button" id="modifyBtn" class="btn btn-primary">수정</button>
-				<button class="btn btn-primary" id="saveBtn" type="button" data-dismiss="modal">저장</button>
-				<button class="btn btn-primary" id="modifySaveBtn" type="button" data-dismiss="modal">수정완료</button>
+						</select>
+						</div>
+						<div class="route_select">
+							<p class="select_title" style="width: 90px">출발일시</p>
+							<input class="form-control" type="datetime-local" id="dateTimeInput" name="dateTimeInput"><br>
+							<br>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+					<button type="button" id="modifyBtn" class="btn btn-primary">수정</button>
+					<button class="btn btn-primary" id="saveBtn" type="button" data-dismiss="modal">저장</button>
+					<button class="btn btn-primary" id="modifySaveBtn" type="button" data-dismiss="modal">수정완료</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- 배차 등록 창 끝 -->
+<!-- manager_route_content2 끝 -->
 
 <!-- 배차등록 스크립트 -->
 <script type="text/javascript">

@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/reserve/*")
@@ -42,8 +44,35 @@ public class PayController {
     }
 
     @GetMapping(value = {"reserve_pay/{id}", "reserve_pay"})
-    public String mainRegisterPay(@PathVariable(value = "id") String id) {
+    public String mainRegisterPay(@PathVariable(value = "id") String id,
+                                  Model model,
+                                  HttpSession session) {
+        model.addAttribute("startRegion", session.getAttribute("startRegion"));
+        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
+        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
+        model.addAttribute("endRegion", session.getAttribute("endRegion"));
+        model.addAttribute("busNo", session.getAttribute("busNo"));
+        model.addAttribute("seatNo", session.getAttribute("seatNo"));
+        model.addAttribute("people", session.getAttribute("people"));
+        model.addAttribute("departureTime", session.getAttribute("departureTime"));
+        model.addAttribute("price", session.getAttribute("price"));
+
         return "reserve/reserve_pay";
+    }
+
+    @GetMapping("reserve_ok")
+    public String endRegisterPay(Model model, HttpSession session) {
+        model.addAttribute("startRegion", session.getAttribute("startRegion"));
+        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
+        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
+        model.addAttribute("endRegion", session.getAttribute("endRegion"));
+        model.addAttribute("busNo", session.getAttribute("busNo"));
+        model.addAttribute("seatNo", session.getAttribute("seatNo"));
+        model.addAttribute("people", session.getAttribute("people"));
+        model.addAttribute("departureTime", session.getAttribute("departureTime"));
+        model.addAttribute("price", session.getAttribute("price"));
+
+        return "reserve/reserve_ok";
     }
 
 }

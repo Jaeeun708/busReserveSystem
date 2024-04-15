@@ -33,44 +33,43 @@
 <!-- <script src="/resources/js/pay.js"></script> -->
 </head>
 <body>
-<!-- main_wrap 시작 -->
-<div id="main_wrap">
-	<!-- header 시작 -->
-	<div id="header">
-		<div id="header_top_nav">
-			<div id="info_nav">
-				<ul>
-					<!-- 인증된(로그인한) 사용자에게 보임 -->
-					<sec:authorize access="isAuthenticated()">
-						<li>
-							<span class="top_name">
-								<span>
-									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-										 class="bi bi-person-fill" viewBox="0 0 16 16">
-										<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
-									</svg>
-									<sec:authentication property="principal.user.name"/>
-								</span>
-								님 환영합니다.
+<!-- header 시작 -->
+<div id="header">
+	<div id="header_top_nav">
+		<div id="info_nav">
+			<ul>
+				<!-- 인증된(로그인한) 사용자에게 보임 -->
+				<sec:authorize access="isAuthenticated()">
+					<li>
+						<span class="top_name">
+							<span>
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+									 class="bi bi-person-fill" viewBox="0 0 16 16">
+									<path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+								</svg>
+								<sec:authentication property="principal.user.name"/>
 							</span>
-						</li>
-					</sec:authorize>
+							님 환영합니다.
+						</span>
+					</li>
+				</sec:authorize>
 
-					<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
-					<sec:authorize access="isAnonymous()">
-						<li><a href="/member/login">로그인</a></li>
-						<li><a href="/member/memberjoin">회원가입</a></li>
-					</sec:authorize>
+				<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
+				<sec:authorize access="isAnonymous()">
+					<li><a href="/member/login">로그인</a></li>
+					<li><a href="/member/memberjoin">회원가입</a></li>
+				</sec:authorize>
 
-					<!-- 인증된(로그인한) 사용자에게 보임 -->
-					<sec:authorize access="isAuthenticated()">
-						<li><a href="/member/logout">로그아웃</a></li>
-					</sec:authorize>
+				<!-- 인증된(로그인한) 사용자에게 보임 -->
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="/member/logout">로그아웃</a></li>
+				</sec:authorize>
 
-					<!-- 인증된(MEMBER) 사용자에게 보임 -->
-					<sec:authorize access="hasRole('ROLE_MEMBER')">
-						<li><a href="/mypage/mypage_info">마이페이지</a></li>
-					</sec:authorize>
+				<!-- 인증된(MEMBER) 사용자에게 보임 -->
+				<sec:authorize access="hasRole('ROLE_MEMBER')">
+					<li><a href="/mypage/mypage_info">마이페이지</a></li>
+				</sec:authorize>
+
 
 					<!-- 인증된(ADMIN) 사용자에게 보임 -->
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -93,6 +92,23 @@
 					</sec:authorize>
 				</ul>
 			</div>
+
 		</div>
+		<div id="logo"><a href="../reserve/reserve_main"><img src="/resources/img/logo.png"/></a></div>
+		<div id="menu_nav">
+			<ul>
+				<li><a href="../reserve/reserve_main">승차권예매</a></li>
+				<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
+				<sec:authorize access="isAnonymous()">
+					<li><a href="/reserve/reserve_login">조회/변경/취소</a></li>
+				</sec:authorize>
+				<!-- 인증된(로그인한) 사용자에게 보임 -->
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="/reserve/reserve_list">조회/변경/취소</a></li>
+				</sec:authorize>
+			</ul>
 		</div>
+	</div>
 </div>
+<!-- content_wrap시작(70%) -->
+<div id="content_wrap">

@@ -5,7 +5,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<%@include file="../includes/side.jsp"%>
+<!-- side -->
+<%@include file="../includes/managerSide.jsp"%>
+
 <!-- manager_payment1 시작 -->
 <div id="manager_payment_content1">
 	<!-- 큰제목 -->

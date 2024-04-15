@@ -31,7 +31,6 @@
 </div>
 
 <div class="container">
-
 	<!-- 로그인 섹션 위에 텍스트 추가 -->
 	<div class="row justify-content-start"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
 		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
