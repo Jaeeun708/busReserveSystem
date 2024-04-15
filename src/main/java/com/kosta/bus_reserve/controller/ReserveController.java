@@ -85,4 +85,14 @@ public class ReserveController {
         List<SearchedDispatch> recordList = reserveService.getRecordsByUserId(userId);
         return recordList;
     }
+
+    /*승차권 예매 조회*/
+    @GetMapping("/reserve_list")
+    public String reserveList(){
+        return "reserve/reserve_list";
+    }
+
+    /*승차권 예매 취소*/
+
+    /*승차권 예매 삭제*/
 }

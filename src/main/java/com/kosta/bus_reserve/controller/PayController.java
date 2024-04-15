@@ -1,5 +1,6 @@
 package com.kosta.bus_reserve.controller;
 
+import com.kosta.bus_reserve.service.MemberService;
 import com.kosta.bus_reserve.service.PayService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpSession;
 public class PayController {
 
     private PayService service;
+
+    private MemberService memberService;
 
     @GetMapping("reserve_login")
     public String registerPay() {
