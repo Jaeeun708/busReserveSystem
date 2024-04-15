@@ -10,28 +10,42 @@
 		<h5>승차권 예매 > 결제</h5>
 	</div>
 
-<form method="post">
-	<input type="hidden" name="startRegion" value="${startRegion}">
-	<input type="hidden" name="startTerminal" value="${startTerminal}">
-	<input type="hidden" name="endTerminal" value="${endTerminal}">
-	<input type="hidden" name="endRegion" value="${endRegion}">
-	<input type="hidden" name="busNo" value="${busNo}">
-	<input type="hidden" name="seatNo" value="${seatNo}">
-	<input type="hidden" name="people" value="${people}">
-	<input type="hidden" name="departureTime" value="${departureTime}">
-	<input type="hidden" name="price" value="${price}">
-	<button type="submit">Submit</button>
-</form>
+<div class="shadow p-3 mb-5 bg-white rounded">
+	<table class="table table-bordered">
+		<thead>
+		<tr>
+			<th>출발지</th>
+			<th>도착지</th>
+			<th>버스 번호</th>
+			<th>좌석 번호</th>
+			<th>승객 수</th>
+			<th>출발 시간</th>
+			<th>가격</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td>[${startRegion}]${startTerminal}</td>
+			<td>[${endRegion}]${endTerminal}</td>
+			<td>${busNo}</td>
+			<td>${seatNo}</td>
+			<td>${people}</td>
+			<td>${departureTime}</td>
+			<td>${price}</td>
+		</tr>
+		</tbody>
+	</table>
+</div>
 
 	<!-- reserve_pay_content1 시작 -->
 	<div id="reserve_pay_content1">
-		<form method="post">
+		<form method="post" action="reserve_pay_ok">
 			<input type="hidden" name="payNo" value="${payNo }">
 			<input type="hidden" name="id" id="userId" value="${id }">
-
-			<input type="hidden" name="amount" value="${price}">
+			<!--<input type="hidden" name="amount" value="${price}">-->
 			<input type="hidden" name="paymentDate" value="${paymentDate }">
 			<input type="hidden" name="payStatus" value="${payStatus }">
+			<input type="hidden" id="cardName" value="${cardName}">
 			<input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
 			<input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
 			<input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
@@ -104,6 +118,10 @@
 			$("#birth").val(data.birth);
 			$("#phoneNo").val(data.phoneNo);
 
+			if (data.myCardVO && data.myCardVO.cardName) {
+				$("#cardName").val(data.myCardVO.cardName);
+			}
+
 			// 생년월일을 변환하여 입력 필드에 설정
 			var birth = $("#birth").val();
 			var formattedBirth = formatBirth(birth);
@@ -116,9 +134,9 @@
 				$("#cardNo2").val(cardNo.slice(5, 9));
 				$("#cardNo3").val(cardNo.slice(10, 14));
 				$("#cardNo4").val(cardNo.slice(15, 19));
-			}
-		});
-	});
+			} // end if
+		}); //end getJson
+	}); //end ready
 
 	$("#payInsert").on("click", function(e) {
 		e.preventDefault();
@@ -164,7 +182,7 @@
 			var pay = {
 				payNo: $("input[name='payNo']").val(),
 				id: "nonmember",
-				amount: $("input[name='amount']").val(),
+				amount: $("input[name='price']").val(),
 				paymentDate: $("input[name='paymentDate']").val(),
 				payStatus: "승인",
 				cardNo: formatCardNo(cardNo),
@@ -177,13 +195,12 @@
 			//ajax 메서드 호출 및 입력한 데이터들 삽입
 			payInsertService.insert(pay, function(result) {
 				console.log("결제가 성공적으로 등록되었습니다.");
-
 			});
 		} else {
 			var pay = {
 				payNo: $("input[name='payNo']").val(),
 				id: $("input[name='id']").val(),
-				amount: $("input[name='amount']").val(),
+				amount: $("input[name='price']").val(),
 				paymentDate: $("input[name='paymentDate']").val(),
 				payStatus: "승인",
 				cardNo: formatCardNo(cardNo),
@@ -195,11 +212,9 @@
 
 			payInsertService.insert(pay, function(result) {
 				console.log("결제가 성공적으로 등록되었습니다.");
-
 			});
-		}
-
-	});
+		} //end else
+	}); //end clickEvent
 
 </script>
 

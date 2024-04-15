@@ -31,7 +31,6 @@
 </div>
 
 <div class="container">
-
 	<!-- 로그인 섹션 위에 텍스트 추가 -->
 	<div class="row justify-content-start"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
 		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
@@ -45,17 +44,6 @@
 				<div class="card-body">
 					<h2 class="text-center mb-4">회원 로그인</h2>
 					<form id="memberForm" method="post">
-
-						<input type="text" name="startRegion" value="${startRegion}">
-						<input type="text" name="startTerminal" value="${startTerminal}">
-						<input type="text" name="endTerminal" value="${endRegion}">
-						<input type="text" name="endRegion" value="${endTerminal}">
-						<input type="text" name="busNo" value="${busNo}">
-						<input type="text" name="seatNo" value="${seatNo}">
-						<input type="text" name="people" value="${people}">
-						<input type="text" name="departureTime" value="${departureTime}">
-						<input type="text" name="price" value="${price}">
-
 						<div class="form-group">
 							<input type="text" name="id" id="userId" class="form-control" placeholder="아이디" required>
 						</div>
