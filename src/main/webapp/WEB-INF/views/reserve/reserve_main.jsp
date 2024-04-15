@@ -89,7 +89,9 @@
 						aria-label="Close"></button>
 				</div>
 				<div class="modal-body">
-					* 출발지 터미널을 선택해주세요.<br>
+					<div name = "pre-usedLayer"><%--회원이 기존에 이용했던 노선--%>
+					</div>
+					* 터미널을 선택해주세요.<br>
 					<div name = "startLayer">
 						<strong><i class="fa-solid fa-check"></i>출발지 터미널</strong>
 						<table>
@@ -168,11 +170,9 @@
 				data: {terminalName: terminalName},
 				dataType: 'json',
 				success: function (candidates) {
-					console.log("success바로 밑에 줄" + candidates);//test
 					$('#destinationTerminal').empty();
 					$('#destinationTerminal').append($('<b>').text('"' + terminalName + '"' + '에 대한 도착 정보입니다...원하시는 목적지를 선택해주세요.'));
 					$.each(candidates, function (index, candidate) {
-						console.log("each문 바로 밑에 줄" + candidates);//test
 						var newRow = $('<tr>').append(
 								$('<td>').addClass('obj_visible').append(
 										$('<a>').attr('href', '#').addClass('terminal-link').text('[' + candidate.endRegion + ']' + candidate.endTerminal)
@@ -481,6 +481,68 @@
 			}
 		});
 	});//end func
+</script>
+
+<script>
+	$(document).ready(function() {  //pre-usedLayer 회원이 이용했던 노선 추가. (로그인 일때)
+
+		$.ajax({
+			type: 'GET',
+			url: '/user-authentication',
+			success: function(response) {  //로그인 안했으면
+				if(!response){
+					return;
+				}else{
+					$.ajax({  //ajax1
+						type: 'GET',
+						url: '/getUserId', // 사용자 id를 반환하는 엔드포인트
+						success: function(userId) { //success1
+							console.log("userId:"+ userId);
+
+							$.ajax({
+								type:'POST',
+								url:'/reserve/pre-used-terminal',
+								data:{userId: userId},
+								success: function(terminals){
+									console.log(terminals);
+									var userName = "${pageContext.request.userPrincipal.name}"; //현재 로그인한 유저네임
+									console.log(userName);
+									var html ="[빠른선택] <br> 다음은 "+ userName + " 님이 기존에 이용하셨던 노선입니다.  <br>";
+									$.each(terminals, function (index, terminal){
+										html += "<a href='#' class='start-endSet'>" +
+												"<ul class = 'tmList'>" +
+												"<li class = 'start-tm'>" + "["+terminal.startRegion+"]"+terminal.startTerminal + "</li>" +
+												"<li>→</li>" +
+												"<li class = 'end-tm'>" + "["+terminal.endRegion+"]"+terminal.endTerminal + "</li>" +
+												"</ul>" +
+												"</a>";
+									})//end $.each
+									$('div[name="pre-usedLayer"]').html(html);
+								},// end success
+							});
+						} //end success1
+					}); //end ajax1
+				}//end else
+			}//end success
+		});
+
+	});//end func
+</script>
+
+<script>
+    $('div[name="pre-usedLayer').on('click','a.start-endSet',function () {  //빠른선택
+        var startPoint = $(this).find('li.start-tm').text();
+        var endPoint = $(this).find('li.end-tm').text();
+        console.log(startPoint);//test
+        console.log(endPoint);//test
+
+        $('#start_point').val(startPoint);
+        $('#end_point').val(endPoint);
+
+        choice_terminal.hide(); //모달숨김
+
+    });//end $.('.btn-primary').click
+
 </script>
 
 

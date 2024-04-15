@@ -18,7 +18,7 @@ public class ReserveService {
     private ReserveMapper reserveMapper;
 
     public List<TerminalVO> getTerminalList(){
-        System.out.println("mapper: " + reserveMapper);
+        //System.out.println("mapper: " + reserveMapper);
         List<TerminalVO> terminalList = null;
         terminalList = reserveMapper.getTerminalList();
         return terminalList;
@@ -35,9 +35,14 @@ public class ReserveService {
         searchedList = reserveMapper.getDispatchList(searchedDispatch);
         return searchedList;
     }
-
     public List<TicketVO> getTicketsByDispatchNo(int dispatchNo){
         return reserveMapper.getTickets(dispatchNo);
+    }
+
+    public List<SearchedDispatch> getRecordsByUserId(String userId){
+        List<SearchedDispatch> list = reserveMapper.getRecordsByUserId(userId);
+        System.out.println(list);
+        return list;
     }
 
 }
