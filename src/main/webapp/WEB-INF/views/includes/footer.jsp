@@ -20,26 +20,5 @@
 		</div>
 	</div>
 	<!-- footer끝 -->
-<%--<script>
-	$(document).ready(function() {
-		function do_reposition_footer() {
-			header_height = document.getElementById('header')[0].clientHeight + 2;
-			content_height = document.getElementById('content_wrap')[0].clientHeight;
-			footer_height = document.getElementById('footer')[0].clientHeight;
-			alert(header_height);
-			body_height = header_height + content_height + footer_height;
-
-			if (window.innerHeight > body_height) {
-				t = window.innerHeight - header_height - footer_height - 2;
-				document.getElementById('content_wrap')[0].style.height = t + 'px';
-			}
-		}
-
-		window.addEventListener('resize', function(event) {
-			document.getElementById('content_wrap')[0].style.height = '';
-			do_reposition_footer();
-		});
-	});
-</script>--%>
 </body>
 </html>
