@@ -6,11 +6,14 @@
 
 <div id="side">
 	<ul class="nav flex-column">
-	  <li class="nav-item">
-	    <a class="nav-link" aria-current="page" href="../manager/manager_info.do">관리자 정보</a>
-	  </li>
-	  <li class="nav-item">
-	    <a class="nav-link" href="../manager/manager_route.do">배차관리</a>
-	  </li>
+		<li class="nav-item">
+			<a class="nav-link" aria-current="page" href="../manager/manager_info">관리자 정보</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="../manager/manager_route">배차관리</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="../manager/manager_payment">결제내역</a>
+		</li>
 	</ul>
 </div>

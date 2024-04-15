@@ -359,11 +359,23 @@ div.bg-white{
 }
 #dispatchModal .route_select select, #dispatchModal .route_select p, #dispatchModal .route_select #dateTimeInput{
 	float:left;
-} 
+}
 #dispatchModal .form-select{
 	width:170px;
 	margin-left: 10px;
 }
 #dateTimeInput{
 	width:230px;
+}
+/*결제내역페이지*/
+#manager_payment_content1{
+	padding:50px;
+	float: left;
+}
+#manager_payment_content1 > .content_title{
+	font-size: 25px;
+	color:#000000;
+}
+.content_title>i{
+	margin-right: 5px;
 }
