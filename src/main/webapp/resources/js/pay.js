@@ -5,7 +5,7 @@ var payInsertService = (function () {
 
     function insert(pay, callback, error) {
         $.ajax({
-            url: '/reserve/reserve_pay',
+            url: '/reserve/reserve_pay_ok',
             type: 'post',
             data: JSON.stringify(pay),
             contentType: 'application/json; charset=utf-8',
@@ -13,6 +13,8 @@ var payInsertService = (function () {
                 if (callback) {
                     callback(result);
                 } //end success if
+
+                window.location.href = "/reserve/reserve_ok";
             }, //end success
             error: function (xhr, status, er) {
                 if (error) {

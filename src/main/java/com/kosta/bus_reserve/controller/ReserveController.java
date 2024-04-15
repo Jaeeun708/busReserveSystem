@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -52,7 +53,7 @@ public class ReserveController {
         return tickets;
     }
 
-    @PostMapping("/check-info")  //예매정보를 결제페이지로 넘김.
+    @PostMapping("/check-info") //예매정보를 결제페이지로 넘김.
     public String checkInfo(@RequestParam String startRegion,
                             @RequestParam String startTerminal,
                             @RequestParam String endTerminal,
@@ -62,19 +63,17 @@ public class ReserveController {
                             @RequestParam String people,
                             @RequestParam String departureTime,
                             @RequestParam String price,
-                            Model model){
-        //System.out.println("/check-info 컨트롤러 정상작동 중");
-        //System.out.println(startRegion);
-        model.addAttribute("startRegion",startRegion);
-        model.addAttribute("startTerminal",startTerminal);
-        model.addAttribute("endTerminal",endTerminal);
-        model.addAttribute("endRegion",endRegion);
-        model.addAttribute("busNo",busNo);
-        model.addAttribute("seatNo",seatNo);
-        model.addAttribute("people",people);
-        model.addAttribute("departureTime",departureTime);
-        model.addAttribute("price",price);
-        return "reserve/reserve_login";
+                            HttpSession session) {
+        session.setAttribute("startRegion", startRegion);
+        session.setAttribute("startTerminal", startTerminal);
+        session.setAttribute("endTerminal", endTerminal);
+        session.setAttribute("endRegion", endRegion);
+        session.setAttribute("busNo", busNo);
+        session.setAttribute("seatNo", seatNo);
+        session.setAttribute("people", people);
+        session.setAttribute("departureTime", departureTime);
+        session.setAttribute("price", price);
+        return "redirect:reserve_login";
     }
 
     @PostMapping("/pre-used-terminal")

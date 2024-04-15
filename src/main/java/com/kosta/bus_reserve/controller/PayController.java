@@ -6,6 +6,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @AllArgsConstructor
 @RequestMapping("/reserve/*")
@@ -22,15 +24,6 @@ public class PayController {
     public String postRegisterPay(@RequestParam(value = "birth", required = false) String birth,
                                   @RequestParam(value = "phoneNo", required = false) String phoneNo,
                                   @RequestParam(value = "id", required = false) String id,
-                                  @RequestParam(value = "startRegion", required = false) String startRegion,
-                                  @RequestParam(value = "startTerminal", required = false) String startTerminal,
-                                  @RequestParam(value = "endTerminal", required = false) String endTerminal,
-                                  @RequestParam(value = "endRegion", required = false) String endRegion,
-                                  @RequestParam(value = "busNo", required = false) String busNo,
-                                  @RequestParam(value = "seatNo", required = false) String seatNo,
-                                  @RequestParam(value = "people", required = false) String people,
-                                  @RequestParam(value = "departureTime", required = false) String departureTime,
-                                  @RequestParam(value = "price", required = false) String price,
                                   Model model) {
         System.out.println("birth: " + birth);
         System.out.println("phoneNo: " + phoneNo);
@@ -40,15 +33,6 @@ public class PayController {
         model.addAttribute("birth", birth);
         model.addAttribute("phoneNo", phoneNo);
 
-        model.addAttribute("startTerminal", startTerminal);
-        model.addAttribute("endTerminal", endTerminal);
-        model.addAttribute("endRegion", endRegion);
-        model.addAttribute("busNo", busNo);
-        model.addAttribute("seatNo", seatNo);
-        model.addAttribute("people", people);
-        model.addAttribute("departureTime", departureTime);
-        model.addAttribute("price", price);
-
         if (id != null) {
             return "redirect:reserve_pay/" + id;
         } else {
@@ -57,8 +41,35 @@ public class PayController {
     }
 
     @GetMapping(value = {"reserve_pay/{id}", "reserve_pay"})
-    public String mainRegisterPay(@PathVariable(value = "id") String id) {
+    public String mainRegisterPay(@PathVariable(value = "id") String id,
+                                  Model model,
+                                  HttpSession session) {
+        model.addAttribute("startRegion", session.getAttribute("startRegion"));
+        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
+        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
+        model.addAttribute("endRegion", session.getAttribute("endRegion"));
+        model.addAttribute("busNo", session.getAttribute("busNo"));
+        model.addAttribute("seatNo", session.getAttribute("seatNo"));
+        model.addAttribute("people", session.getAttribute("people"));
+        model.addAttribute("departureTime", session.getAttribute("departureTime"));
+        model.addAttribute("price", session.getAttribute("price"));
+
         return "reserve/reserve_pay";
+    }
+
+    @GetMapping("reserve_ok")
+    public String endRegisterPay(Model model, HttpSession session) {
+        model.addAttribute("startRegion", session.getAttribute("startRegion"));
+        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
+        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
+        model.addAttribute("endRegion", session.getAttribute("endRegion"));
+        model.addAttribute("busNo", session.getAttribute("busNo"));
+        model.addAttribute("seatNo", session.getAttribute("seatNo"));
+        model.addAttribute("people", session.getAttribute("people"));
+        model.addAttribute("departureTime", session.getAttribute("departureTime"));
+        model.addAttribute("price", session.getAttribute("price"));
+
+        return "reserve/reserve_ok";
     }
 
 }
