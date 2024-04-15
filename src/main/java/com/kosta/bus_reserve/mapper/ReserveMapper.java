@@ -22,4 +22,8 @@ public interface ReserveMapper {
 
     //사용자 id로 기존에 예약했던 노선리스트 불러오기
     public List<SearchedDispatch> getRecordsByUserId(String userId);
+
+    //사용자 id로 예약내역 불러오기
+
+
 }

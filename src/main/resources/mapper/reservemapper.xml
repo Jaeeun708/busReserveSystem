@@ -64,5 +64,37 @@
         where tk.id = #{userId}
     </select>
 
+    <!--예매내역 전체 조회-->
+    <resultMap type="com.kosta.bus_reserve.domain.PayDTO" id="reserveListMap">
+        <result property="id" column="id"/>
+        <result property="paymentDate" column="payment_date"/>
+        <result property="amount" column="amount"/>
+        <collection property="tickets" resultMap="ticketResultMap"/>
+        <collection property="dispatch" resultMap="dispatchs"/>
+        <collection property="bus" resultMap="bus"/>
+        <collection property="terminal" resultMap="terminals"/>
+    </resultMap>
+    <resultMap type="com.kosta.bus_reserve.domain.DispatchVO" id="dispatchs">
+        <result property="departureTime" column="departure_time"/>
+    </resultMap>
+    <resultMap type="com.kosta.bus_reserve.domain.BusVO" id="bus">
+        <result property="busType" column="bus_type"/>
+    </resultMap>
+    <resultMap type="com.kosta.bus_reserve.domain.TerminalVO" id="terminals">
+        <result property="startTerminal" column="start_terminal"/>
+        <result property="endTerminal" column="end_terminal"/>
+    </resultMap>
 
+    <select id="reserveList" resultMap="reserveListMap">
+        SELECT p.id, COUNT(t.pay_no) AS ticket_count, tm.terminal_name, tm2.terminal_name, p.payment_date,
+               di.departure_time, b.bus_type, p.amount, t.ticket_status
+        FROM pay p JOIN ticket t ON p.pay_no = t.pay_no
+                   JOIN dispatch_info di ON di.dispatch_no = t.dispatch_no
+                   JOIN bus b ON b.bus_no = di.bus_no
+                   JOIN terminal tm ON di.start_point = tm.terminal_no
+                   JOIN terminal tm2 ON di.end_point = tm2.terminal_no
+        WHERE p.id = #{id }
+        GROUP BY
+            p.id, tm.terminal_name, tm2.terminal_name, p.payment_date, di.departure_time, b.bus_type, p.amount, t.ticket_status
+    </select>
 </mapper>

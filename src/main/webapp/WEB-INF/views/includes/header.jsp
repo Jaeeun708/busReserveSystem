@@ -81,8 +81,16 @@
 			<div id="logo"><img src="/resources/img/logo2.png"/></div>
 			<div id="menu_nav">
 				<ul>
-					<li>승차권예매</li>
-					<li>조회/변경/취소</li>
+					<li><a href="/reserve/reserve_login">승차권예매</a></li>
+
+					<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
+					<sec:authorize access="isAnonymous()">
+						<li><a href="/reserve/reserve_login">조회/변경/취소</a></li>
+					</sec:authorize>
+					<!-- 인증된(로그인한) 사용자에게 보임 -->
+					<sec:authorize access="isAuthenticated()">
+						<li><a href="/reserve/reserve_list">조회/변경/취소</a></li>
+					</sec:authorize>
 				</ul>
 			</div>
 		</div>

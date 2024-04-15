@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
                 .and()
                 .formLogin()
-                .loginPage("/member/login") //사용자가 인증되지 않은 경우 로그인 폼으로 이동
+                .loginPage("/memger/login") //사용자가 인증되지 않은 경우 로그인 폼으로 이동
                 .loginProcessingUrl("/login")  //로그인 창에 입력한 데이터 처리
-                .defaultSuccessUrl("/reserve/reserve_main") //로그인 성공후 이동할 페이지
+                .defaultSuccessUrl("/reserve/reserve_main") //로그인 성공후 이동할 페이지*/
 
                 .and()
                 .logout()
