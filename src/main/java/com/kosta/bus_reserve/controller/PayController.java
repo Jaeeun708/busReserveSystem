@@ -8,39 +8,57 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @AllArgsConstructor
-@RequestMapping("/pay/*")
+@RequestMapping("/reserve/*")
 public class PayController {
 
     private PayService service;
 
-    @GetMapping("registerPay")
+    @GetMapping("reserve_login")
     public String registerPay() {
-        return "registerPay";
+        return "reserve/reserve_login";
     }
 
-    @PostMapping("registerPay")
-    public String postRegisterPay(@ModelAttribute("birth") String birth,
-                                  @ModelAttribute("allPhoneNo") String phoneNo,
-                                  @RequestParam("id") String id,
-                                  Model model
-    ) {
+    @PostMapping("reserve_login")
+    public String postRegisterPay(@RequestParam(value = "birth", required = false) String birth,
+                                  @RequestParam(value = "phoneNo", required = false) String phoneNo,
+                                  @RequestParam(value = "id", required = false) String id,
+                                  @RequestParam(value = "startRegion", required = false) String startRegion,
+                                  @RequestParam(value = "startTerminal", required = false) String startTerminal,
+                                  @RequestParam(value = "endTerminal", required = false) String endTerminal,
+                                  @RequestParam(value = "endRegion", required = false) String endRegion,
+                                  @RequestParam(value = "busNo", required = false) String busNo,
+                                  @RequestParam(value = "seatNo", required = false) String seatNo,
+                                  @RequestParam(value = "people", required = false) String people,
+                                  @RequestParam(value = "departureTime", required = false) String departureTime,
+                                  @RequestParam(value = "price", required = false) String price,
+                                  Model model) {
         System.out.println("birth: " + birth);
         System.out.println("phoneNo: " + phoneNo);
         System.out.println("id: " + id);
 
-        if (id != null) {
-            model.addAttribute("userId", id);
-        }
+        // 모델에 birth와 phoneNo를 추가하여 JSP로 전달
+        model.addAttribute("birth", birth);
+        model.addAttribute("phoneNo", phoneNo);
 
-        return "redirect:mainRegisterPay/" + id;
+        model.addAttribute("startTerminal", startTerminal);
+        model.addAttribute("endTerminal", endTerminal);
+        model.addAttribute("endRegion", endRegion);
+        model.addAttribute("busNo", busNo);
+        model.addAttribute("seatNo", seatNo);
+        model.addAttribute("people", people);
+        model.addAttribute("departureTime", departureTime);
+        model.addAttribute("price", price);
+
+        if (id != null) {
+            return "redirect:reserve_pay/" + id;
+        } else {
+            return "reserve/reserve_pay";
+        }
     }
 
-    @GetMapping("mainRegisterPay")
-    public String mainRegisterPay(@RequestParam(name = "id", required = false) String id) {
-        if (id != null) {
-            System.out.println("RequestParam id: " + id);
-        }
-        return "mainRegisterPay"; // id가 있든 없든 페이지 이동 수행
+    @GetMapping(value = {"reserve_pay/{id}", "reserve_pay"})
+    public String mainRegisterPay(@PathVariable(value = "id") String id) {
+        return "reserve/reserve_pay";
     }
 
 }

@@ -5,7 +5,7 @@ var payInsertService = (function () {
 
     function insert(pay, callback, error) {
         $.ajax({
-            url: '/pay/mainRegisterPay',
+            url: '/reserve/reserve_pay',
             type: 'post',
             data: JSON.stringify(pay),
             contentType: 'application/json; charset=utf-8',
@@ -22,22 +22,8 @@ var payInsertService = (function () {
         }); //end ajax
     } //end insert
 
-    function userAndCardInfo(callback) {
-        $.ajax({
-            url: '/pay/mainRegisterPay/{id}',
-            type: 'get',
-            dataType: 'application/json; charset=utf-8',
-            success: function (result, status, xhr) {
-                if (callback) {
-                    callback(result);
-                } // end success if
-            } // end success
-        }); // end ajax
-    } // end userAndCardInfo
-
     return {
-        insert: insert,
-        userAndCardInfo: userAndCardInfo
+        insert: insert
     };
 
 })();

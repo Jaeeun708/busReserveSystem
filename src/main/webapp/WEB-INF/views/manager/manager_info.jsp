@@ -23,6 +23,7 @@
                 <td><sec:authentication property="principal.user.phoneNo"/></td>
             </tr>
         </table>
+
 </div>
 
     <!-- JS 부트스트랩 적용 -->
@@ -33,3 +34,4 @@
 
     <!-- footer -->
 <%@include file="../includes/footer.jsp"%>
+

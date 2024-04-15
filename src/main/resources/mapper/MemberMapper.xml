@@ -6,7 +6,7 @@
 <mapper namespace="com.kosta.bus_reserve.mapper.MemberMapper">
 
     <!-- 사용자 추가(회원가입) -->
-    <insert id="saveMember" >
+    <insert id="saveMember">
         INSERT INTO user_info (id, password, name, birth,  phone_no, email, type)
         VALUES (#{id}, #{password}, #{name}, TO_DATE(#{birth}, 'YYYY-MM-DD HH24:MI:SS'), #{phoneNo}, #{email}, 'ROLE_MEMBER')
     </insert>
@@ -17,4 +17,5 @@
         FROM user_info
         WHERE id = #{id}
     </select>
+
 </mapper>

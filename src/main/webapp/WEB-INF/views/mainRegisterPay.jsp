@@ -11,7 +11,8 @@
 
 <form method="post">
     <input type="hidden" name="payNo" value="${payNo }">
-    <input type="text" name="id" id="userId" value="${id }">
+    <input type="hidden" name="id" id="userId" value="${id }">
+
     <input type="hidden" name="amount" value="15000">
     <input type="hidden" name="paymentDate" value="${paymentDate }">
     <input type="hidden" name="payStatus" value="${payStatus }">
@@ -39,16 +40,15 @@
     <select id="cardDropdownYear"></select>
     <label for="cardDropdownYear">년</label>
     <br>
-    <input type="text" name="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth}" pattern="\d{8}">
+    <input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth }" pattern="\d{8}">
     <br>
-    <input type="hidden" name="phoneNo" placeholder="핸드폰번호" value="${allPhoneNo}">
+    <input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">
     <button type="submit" id="payInsert">제출</button>
 </form>
 
 </body>
 <script type="text/javascript" src="/resources/js/pay.js"></script>
 <script type="text/javascript">
-
     // 현재 년도를 가져오는 함수
     function getYear() {
         var date = new Date();
@@ -69,10 +69,45 @@
         }
     }
 
+    // 생년월일을 "xxxxxxxx" 형식으로 변환하는 함수
+    function formatBirth(birth) {
+        // "-"를 제거하고 공백을 기준으로 문자열을 분리하여 배열로 변환합니다.
+        var parts = birth.replace(/[-\s]/g, "").split(" ");
+        // 첫 번째 요소인 년월일을 추출합니다.
+        var date = parts[0];
+        // 년월일을 8자리로 자릅니다.
+        var formattedDate = date.slice(0, 8);
+        // 자린 생년월일을 반환합니다.
+        return formattedDate;
+    }
+
     // 페이지 로드 시 실행
-    window.onload = function () {
+    $(document).ready(function(){
+
         addYearsDropdown(); // 현재 년도부터 10년 후까지의 옵션을 추가
-    };
+
+        var id = $("#userId").val(); // 입력된 ID 값 가져오기
+
+        $.getJSON('/pay/test/' + id, function(data) {
+            // 서버에서 받은 데이터를 기반으로 입력 필드에 설정
+            $("#birth").val(data.birth); // 생년월일 설정
+            $("#phoneNo").val(data.phoneNo); // 전화번호 설정
+
+            // 생년월일을 변환하여 입력 필드에 설정합니다.
+            var birth = $("#birth").val(); // 입력된 생년월일 값 가져오기
+            var formattedBirth = formatBirth(birth); // 생년월일을 "xxxxxxxx" 형식으로 변환
+            $("#birth").val(formattedBirth); // 변환된 생년월일을 입력 필드에 설정
+
+            // 카드 정보가 있다면 설정
+            if (data.myCardVO) {
+                var cardNo = data.myCardVO.cardNo;
+                $("#cardNo1").val(cardNo.slice(0, 4)); // 카드번호 첫 번째 부분
+                $("#cardNo2").val(cardNo.slice(5, 9)); // 카드번호 두 번째 부분
+                $("#cardNo3").val(cardNo.slice(10, 14)); // 카드번호 세 번째 부분
+                $("#cardNo4").val(cardNo.slice(15, 19)); // 카드번호 네 번째 부분
+            }
+        });
+    });
 
     $("#payInsert").on("click", function(e) {
         e.preventDefault();
@@ -129,10 +164,10 @@
             console.log(pay);
 
             //ajax 메서드 호출 및 입력한 데이터들 삽입
-            // payInsertService.insert(pay, function(result) {
-            //     console.log("결제가 성공적으로 등록되었습니다.");
-            //
-            // });
+            payInsertService.insert(pay, function(result) {
+                console.log("결제가 성공적으로 등록되었습니다.");
+
+            });
         } else {
             var pay = {
                 payNo: $("input[name='payNo']").val(),
@@ -147,10 +182,10 @@
 
             console.log(pay);
 
-            // payInsertService.insert(pay, function(result) {
-            //     console.log("결제가 성공적으로 등록되었습니다.");
-            //
-            // });
+            payInsertService.insert(pay, function(result) {
+                console.log("결제가 성공적으로 등록되었습니다.");
+
+            });
         }
 
     });
