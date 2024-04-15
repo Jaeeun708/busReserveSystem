@@ -5,10 +5,6 @@
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
 
-<!-- 회원가입 form css 부트스트랩 -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
 <!-- 자바 스크립트 -->
 <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
 <script type="text/javascript">

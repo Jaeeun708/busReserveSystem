@@ -104,11 +104,11 @@
 		</table>
 	</div>
 	<!-- #reserve_content2 끝 -->
-	
+
 	<!-- 출발지터미널, 도착지터미널 검색 modal -->
 	<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog  modal-xl">
-			<div class="modal-content">
+			<div class="reserve modal-content">
 				<div class="modal-header">
 					<h1 class="modal-title fs-5" id="exampleModalLabel"><strong>터미널 선택<strong></h1>
 					<button type="button" class="btn-close" data-bs-dismiss="modal"
