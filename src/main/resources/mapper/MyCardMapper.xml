@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.kosta.bus_reserve.mapper.MyCardMapper">
+
+    <!--자주쓰는 카드 조회-->
+    <select id="getMyCard" resultType="com.kosta.bus_reserve.domain.MyCardVO">
+        SELECT id, card_no AS cardNo, card_name AS cardName
+        FROM mycard
+        WHERE id = #{id}
+    </select>
+
+    <!--자주쓰는 카드 등록-->
+    <insert id="saveMyCard">
+        INSERT INTO mycard (id, card_no, card_name)
+        VALUES (#{id}, #{cardNo}, #{cardName})
+    </insert>
+
+    <!--자주쓰는 카드 수정-->
+    <update id="updateMyCard">
+        UPDATE mycard
+        SET card_no = #{cardNo}, card_name = #{cardName}
+        WHERE id = #{id}
+    </update>
+
+    <!--자주쓰는 카드 삭제-->
+    <delete id="deleteMyCard">
+        DELETE FROM mycard WHERE id = #{id}
+    </delete>
+</mapper>
