@@ -153,6 +153,29 @@ button.nav-link{
 .nav-tabs{
 	border-bottom:1px solid #68B3CE;
 }
+/* 배차 부분*/
+table#dispatch{
+	table-layout: fixed;
+	width: 100%; /* 테이블의 전체 너비를 화면에 맞게 설정 */
+	border-collapse: collapse; /* 테이블 셀 사이의 간격을 없앰 */
+}
+#dispatch #col1{
+	width: 12%;
+}
+#dispatch #col2{
+	width: 20.666%;
+}
+#dispatch #col3, #dispatch #col4{
+	width: 23%;
+}
+#dispatch #col5{
+	width: 8.666%;
+}
+#dispatch #col6{
+	width: 12.666%;
+}
+
+
 /*편도, 왕복 탭 클릭시 하단 부분*/
 #myTabContent
 {
@@ -166,6 +189,11 @@ button.nav-link{
 #myTabContent tr,#myTabContent td{
 	padding-top:20px;
 	padding-left:20px;
+}
+#myTabContent td.age{
+	width :50px;
+	padding-top:13px;
+	padding-left:13px;
 }
 .departureTerminal > input, .arrivalTerminal > input, .search_date > input{
 	width:200px;
@@ -221,7 +249,7 @@ div[name="endLayer"]{
 }
 /*날짜*/
 .search_date{
-	width: 370px;
+	width: 200px;
 }
 /*배차정보조회하기 버튼*/
 .btn_get_dispatches{
@@ -238,13 +266,38 @@ div[name="endLayer"]{
 .dispatchTitle > i{
 	padding-right:5px;
 }
+.tablefortd table {
+	margin: auto; /* 테이블 가운데 정렬 */
+}
+#comfirm-peopleNo{
+	border-collapse: collapse; /* 셀 사이의 간격을 없앰 */
+	width: 80%;
+	margin-top: 10%;
+}
+
+#comfirm-peopleNo .underline{
+	border-bottom: 1px solid darkgray; /* 테이블 셀에 테두리를 추가 */
+}
 /*좌석*/
 .seat-table {
 	border-collapse: collapse;
-	width: 40%;
+	width: 75%;
 	margin-left: 15px;
 }
+#picked-seat-amount, #remain-choice{
+	display: inline;
+}
 
+#finish_pick_seats {
+	background: #68B3CE;
+	float: right;
+	width: 80px;
+	height: 35px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
 .seat-table th, .seat-table td {
 	border: 1px solid black;
 	text-align: center;
@@ -260,6 +313,7 @@ div[name="endLayer"]{
 #header_bottom_search {
 	clear: both;
 }
+
 .seat-table tr:not(:last-child) td:nth-child(3) {
 	border-bottom: none;
 	border-top: none;
@@ -291,6 +345,10 @@ div[name="endLayer"]{
 #seatInfoModal{
 	margin-top: 90px;
 }
+img.seat{
+	width:40px;
+	height: auto;
+}
 
 /*로그인 페이지*/
 .container{
@@ -311,6 +369,7 @@ div.bg-white{
 }
 /*회원가입 페이지*/
 #join_content1{
+	padding-top:80px;
 	width:30%;
 	margin: 0 auto;
 }
