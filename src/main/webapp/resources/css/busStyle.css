@@ -101,7 +101,7 @@ i.title_icon{
 button.nav-link{
 	font-size: 19px;
 	color:#ffffff;
-} 
+}
 .nav-tabs{
 	border-bottom:1px solid #68B3CE;
 }
@@ -112,13 +112,13 @@ button.nav-link{
 	border-radius: 0 10px 10px 10px;
 	background-color:#ffffff;
 	font-size: 18px;
-} 
+}
 /*출발지, 선택지 부분*/
 #myTabContent tr,#myTabContent td{
 	padding-top:20px;
 	padding-left:20px;
 }
- .departureTerminal > input, .arrivalTerminal > input, .search_date > input{
+.departureTerminal > input, .arrivalTerminal > input, .search_date > input{
 	width:200px;
 	float:left;
 }
@@ -189,27 +189,27 @@ div[name="endLayer"]{
 }
 /*좌석*/
 .seat-table {
-    border-collapse: collapse;
-    width: 40%;
-    margin-left: 15px; 
+	border-collapse: collapse;
+	width: 40%;
+	margin-left: 15px;
 }
 
 .seat-table th, .seat-table td {
-    border: 1px solid black;
-    text-align: center;
-    width:20% /* td 폭 균등하게 분배 */
+	border: 1px solid black;
+	text-align: center;
+	width:20% /* td 폭 균등하게 분배 */
 }
 /* 3번째 열의 테두리를 없애는 스타일 마지막 라인은 남김.*/
 .hidden {
-    display: none;
+	display: none;
 }
 .choiced{
 	background-color: #68B3CE;
 }
 #header_bottom_search {
-   clear: both;
+	clear: both;
 }
-.seat-table tr:not(:last-child) td:nth-child(3) { 
+.seat-table tr:not(:last-child) td:nth-child(3) {
 	border-bottom: none;
 	border-top: none;
 }
@@ -225,16 +225,16 @@ div[name="endLayer"]{
 	border-left : none;
 }
 .seat-container {
-    position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
-    width: 100%; /* 부모 요소에 꽉 차게 설정 */
+	position: relative; /* 포지션을 상대적으로 지정하여 내부 요소의 위치를 조정 */
+	width: 100%; /* 부모 요소에 꽉 차게 설정 */
 }
 .seat-container span {
-    position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
-    top: 50%; /* 상단 위치를 중앙으로 이동 */
-    left: 50%; /* 좌측 위치를 중앙으로 이동 */
-    transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
-    font-size: 14px; /* 숫자의 크기 설정 */
-    color: black; /* 숫자의 색상 설정 */
+	position: absolute; /* 포지션을 절대적으로 지정하여 이미지 위에 위치시킴 */
+	top: 50%; /* 상단 위치를 중앙으로 이동 */
+	left: 50%; /* 좌측 위치를 중앙으로 이동 */
+	transform: translate(-50%, -50%); /* 중앙 정렬을 위해 이동 */
+	font-size: 14px; /* 숫자의 크기 설정 */
+	color: black; /* 숫자의 색상 설정 */
 }
 
 /*로그인 페이지*/
@@ -269,16 +269,18 @@ div.bg-white{
 #join_content1 .form-group{
 	margin-bottom:15px;
 }
-
 #join_content1 .form-group .btn{
 	background: #68B3CE;
 	color: black;
 	border: 1px solid;
 	font-weight: bold;
+	float: right;
+	margin-right: 10px;
 }
 
 /*마이페이지*/
-#mypage_info_content1{
+/*회원정보*/
+#mypage_info_content1, mycard_info_content, mycard_insert_content{
 	margin-top:90px;
 	margin-bottom:30px;
 }
@@ -288,24 +290,18 @@ div.bg-white{
 	text-align: center;
 	margin-bottom:30px;
 }
-.content_title2{
-	font-size:18px;
-	width:40%;
-	margin: 0 auto;
-	padding-bottom:10px;
-	text-align: left;
-	color:#474C52;
-}
-.myInfo{
+.myInfo, .myCardInfo, .myCardInsert{
 	width: 40%;
 	margin: 20px auto;
 }
-.myInfo tr,.myInfo td,.myInfo th{
+.myInfo tr,.myInfo td,.myInfo th,
+.myCardInfo tr,.myCardInfo td, .myCardInfo th,
+.myCardInsert tr, .myCardInsert th, .myCardInsert td{
 	font-size:18px;
 	border:1px solid #DEE2E6;
 	height: 50px;
 }
-.myInfo th{
+.myInfo th,.myCardInfo th, .myCardInsert th{
 	text-align:center;
 	background: #68B3CE;
 	color:#ffffff;
@@ -315,11 +311,40 @@ div.bg-white{
 	width: 250px;
 }
 
+/*자주 쓰는 카드*/
+#mycard_info_content>.content_title, #mycard_insert_content>.content_title {
+	color: #000000;
+	font-size: 25px;
+	text-align: center;
+	margin-bottom: 30px;
+}
+.myCardInfo table, .myCardInsert table {
+	width: 100%;
+}
+.myCardInfo button, .myCardInsert button {
+	background: #68B3CE;
+	float: right;
+	width: 80px;
+	height: 35px;
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	margin-left: 10px;
+}
+.myCardInsert #mycardName{
+	width: 600px;
+}
+
+.myCardInsert input{
+	width: 130px;
+}
+
 /*관리자페이지*/
 #manager_info_content1{
-	margin-top:90px;
-	width:80%;
-	float: left;
+	color: #000000;
+	font-size: 25px;
+	text-align: center;
+	margin-bottom:30px;
 }
 #manager_info_content1>.myInfo{
 	width:60%;
@@ -366,7 +391,7 @@ div.bg-white{
 }
 #dispatchModal .route_select select, #dispatchModal .route_select p, #dispatchModal .route_select #dateTimeInput{
 	float:left;
-} 
+}
 #dispatchModal .form-select{
 	width:170px;
 	margin-left: 10px;
