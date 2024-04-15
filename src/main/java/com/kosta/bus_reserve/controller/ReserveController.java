@@ -63,8 +63,10 @@ public class ReserveController {
                             @RequestParam String people,
                             @RequestParam String departureTime,
                             @RequestParam String price,
-
+                            @RequestParam String userId,
                             HttpSession session) {
+
+        System.out.println("ReserveController-현재 사용자 아이디: "+userId);
         session.setAttribute("startRegion", startRegion);
         session.setAttribute("startTerminal", startTerminal);
         session.setAttribute("endTerminal", endTerminal);
@@ -74,7 +76,13 @@ public class ReserveController {
         session.setAttribute("people", people);
         session.setAttribute("departureTime", departureTime);
         session.setAttribute("price", price);
-        return "redirect:reserve_login";
+
+        if(userId.equals("anonymousUser")){ //비회원 일때
+            return "redirect:reserve_login";
+        }
+
+        //회원일때
+        return ("redirect:reserve_pay/"+userId);
 
     }
 

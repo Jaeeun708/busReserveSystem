@@ -76,10 +76,10 @@
 				</sec:authorize>
 			</ul>
 		</div>
-		<div id="logo"><a href="../reserve/reserve_main"><img src="/resources/img/logo.png"/></a></div>
+		<div id="logo"><a href="/reserve/reserve_main"><img src="/resources/img/logo.png"/></a></div>
 		<div id="menu_nav">
 			<ul>
-				<li><a href="../reserve/reserve_main">승차권예매</a></li>
+				<li><a href="/reserve/reserve_main">승차권예매</a></li>
 				<!-- 인증되지 않은(로그인하지 않은) 사용자에게 보임 -->
 				<sec:authorize access="isAnonymous()">
 					<li><a href="/reserve/reserve_login">조회/변경/취소</a></li>

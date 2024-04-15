@@ -62,6 +62,8 @@ public class PayController {
 
     @GetMapping("reserve_ok")
     public String endRegisterPay(Model model, HttpSession session) {
+
+
         model.addAttribute("startRegion", session.getAttribute("startRegion"));
         model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
         model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
