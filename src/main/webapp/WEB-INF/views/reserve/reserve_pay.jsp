@@ -10,72 +10,114 @@
 		<h5>승차권 예매 > 결제</h5>
 	</div>
 
-<div class="shadow p-3 mb-5 bg-white rounded">
-	<table class="table table-bordered">
-		<thead>
-		<tr>
-			<th>출발지</th>
-			<th>도착지</th>
-			<th>버스 번호</th>
-			<th>좌석 번호</th>
-			<th>승객 수</th>
-			<th>출발 시간</th>
-			<th>가격</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>[${startRegion}]${startTerminal}</td>
-			<td>[${endRegion}]${endTerminal}</td>
-			<td>${busNo}</td>
-			<td>${seatNo}</td>
-			<td>${people}</td>
-			<td>${departureTime}</td>
-			<td>${price}</td>
-		</tr>
-		</tbody>
-	</table>
-</div>
+<p>[${startRegion}]${startTerminal}</p>
+<p>[${endRegion}]${endTerminal}</p>
+<p>${busNo}</p>
+<p>${seatNo}</p>
+<p>${departureTime}</p>
 
-	<!-- reserve_pay_content1 시작 -->
-	<div id="reserve_pay_content1">
-		<form method="post" action="reserve_pay_ok">
-			<input type="hidden" name="payNo" value="${payNo }">
-			<input type="hidden" name="id" id="userId" value="${id }">
+
+<style>
+	/* 생년월일 입력란 */
+	#birth {
+		text-align: center; /* 텍스트 가운데 정렬 */
+		width: 120px; /* 넓이 설정 */
+		height: 30px; /* 높이 설정 */
+	}
+
+	/* 카드번호 입력란 */
+	#cardNumberInputs {
+		display: flex; /* Flexbox 사용 */
+	}
+
+	#cardNumberInputs input {
+		text-align: center; /* 텍스트 가운데 정렬 */
+		width: 70px; /* 넓이 설정 */
+		height: 30px; /* 높이 설정 */
+		margin-right: 5px; /* 각 카드번호 입력란 사이 간격 설정 */
+	}
+
+	/* 만료월, 만료년도 선택란 */
+	#cardDropdownMonth,
+	#cardDropdownYear {
+		width: 70px; /* 넓이 설정 */
+		height: 30px; /* 높이 설정 */
+	}
+
+	/* 전체 섹션 스타일 */
+	#reserve_pay_content1 {
+		margin: 20px auto; /* 가운데 정렬 */
+		width: 60%; /* 넓이 설정 */
+		padding: 20px; /* 내부 여백 설정 */
+		background-color: #f8f9fa; /* 배경색 설정 */
+		border-radius: 10px; /* 테두리 모서리를 둥글게 만듦 */
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 음영 효과 추가 */
+	}
+</style>
+
+<!-- reserve_pay_content1 시작 -->
+<div id="reserve_pay_content1" class="row justify-content-center"> <!-- 수정된 부분 -->
+	<div class="col-md-6"> <!-- 추가된 부분 -->
+		<div id="reservation_details" class="p-3 mb-3 bg-light rounded">
+			<p id="people">${people} 명</p>
+			<p id="price">${price} 원</p>
+			<p id="totalPrice"></p>
+		</div>
+	</div>
+	<div class="col-md-6"> <!-- 추가된 부분 -->
+		<form method="post" action="reserve_pay_ok" class="needs-validation" novalidate>
+			<input type="hidden" name="payNo" value="${payNo}">
+			<input type="hidden" name="id" id="userId" value="${id}">
 			<!--<input type="hidden" name="amount" value="${price}">-->
-			<input type="hidden" name="paymentDate" value="${paymentDate }">
-			<input type="hidden" name="payStatus" value="${payStatus }">
+			<input type="hidden" name="paymentDate" value="${paymentDate}">
+			<input type="hidden" name="payStatus" value="${payStatus}">
 			<input type="hidden" id="cardName" value="${cardName}">
-			<input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo4" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}">
-			<br>
-			<select id="cardDropdownMonth">
-				<option value="01">01</option>
-				<option value="02">02</option>
-				<option value="03">03</option>
-				<option value="04">04</option>
-				<option value="05">05</option>
-				<option value="06">06</option>
-				<option value="07">07</option>
-				<option value="08">08</option>
-				<option value="09">09</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			<label for="cardDropdownMonth">월</label>
-			&emsp;
-			<select id="cardDropdownYear"></select>
-			<label for="cardDropdownYear">년</label>
-			<br>
-			<input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth }" pattern="\d{8}">
-			<br>
-			<input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">
-			<button type="submit" id="payInsert">제출</button>
+			<div class="form-row">
+				<div class="col-md-6 mb-3">
+					<label class="col-form-label">생년월일 (8자리)</label>
+					<input type="text" name="birth" id="birth" class="form-control form-control-sm" placeholder="예) 19900101" maxlength="8" value="${birth}" pattern="\d{8}" required>
+				</div>
+				<div class="col-md-6 mb-3 text-right">
+					<div class="form-row" id="cardNumberInputs">
+						<label class="col-form-label">카드번호</label>
+						<input type="text" id="cardNo1" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
+						<input type="text" id="cardNo2" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
+						<input type="text" id="cardNo3" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
+						<input type="text" id="cardNo4" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
+					</div>
+				</div>
+			</div>
+			<div class="form-row">
+				<div class="col-md-6 mb-3 text-left">
+					<label for="cardDropdownMonth" class="col-form-label">만료월</label>
+					<select id="cardDropdownMonth" class="custom-select custom-select-sm" required>
+						<option value="">월</option>
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					<label for="cardDropdownYear" class="col-form-label">만료년도</label>
+					<select id="cardDropdownYear" class="custom-select custom-select-sm" required>
+						<option value="">년</option>
+						<!-- Populate years dynamically using JavaScript -->
+					</select>
+				</div>
+			</div>
+			<input type="hidden" name="phoneNo" id="phoneNo" class="form-control form-control-sm" placeholder="핸드폰번호" value="${phoneNo}">
+			<button type="submit" id="payInsert" class="btn btn-primary btn-sm">제출</button>
 		</form>
 	</div>
+</div>
+
 	<!-- reserve_pay_content1 끝 -->
 <script type="text/javascript" src="/resources/js/pay.js"></script>
 <script type="text/javascript">
@@ -107,6 +149,13 @@
 		return formattedDate;
 	}
 
+	function calculateTotalPrice() {
+		var price = parseInt($("#price").text().replace(' 원', '')); // 가격 가져오기
+		var people = parseInt($("#people").text().replace(' 명', '')); // 인원 가져오기
+		var totalPrice = price * people; // 총 가격 계산
+		$("#totalPrice").text(totalPrice.toLocaleString() + ' 원'); // totalPrice에 출력
+	}
+
 	// 페이지 로드 시 실행
 	$(document).ready(function(){
 
@@ -136,6 +185,9 @@
 				$("#cardNo4").val(cardNo.slice(15, 19));
 			} // end if
 		}); //end getJson
+
+
+
 	}); //end ready
 
 	$("#payInsert").on("click", function(e) {
@@ -182,7 +234,7 @@
 			var pay = {
 				payNo: $("input[name='payNo']").val(),
 				id: "nonmember",
-				amount: $("input[name='price']").val(),
+				amount: parseInt($("#price").text()) * parseInt($("#people").text()),
 				paymentDate: $("input[name='paymentDate']").val(),
 				payStatus: "승인",
 				cardNo: formatCardNo(cardNo),
@@ -193,14 +245,14 @@
 			console.log(pay);
 
 			//ajax 메서드 호출 및 입력한 데이터들 삽입
-			payInsertService.insert(pay, function(result) {
-				console.log("결제가 성공적으로 등록되었습니다.");
-			});
+			// payInsertService.insert(pay, function(result) {
+			// 	console.log("결제가 성공적으로 등록되었습니다.");
+			// });
 		} else {
 			var pay = {
 				payNo: $("input[name='payNo']").val(),
 				id: $("input[name='id']").val(),
-				amount: $("input[name='price']").val(),
+				amount: parseInt($("#price").text()) * parseInt($("#people").text()),
 				paymentDate: $("input[name='paymentDate']").val(),
 				payStatus: "승인",
 				cardNo: formatCardNo(cardNo),
@@ -210,9 +262,9 @@
 
 			console.log(pay);
 
-			payInsertService.insert(pay, function(result) {
-				console.log("결제가 성공적으로 등록되었습니다.");
-			});
+			// payInsertService.insert(pay, function(result) {
+			// 	console.log("결제가 성공적으로 등록되었습니다.");
+			// });
 		} //end else
 	}); //end clickEvent
 
