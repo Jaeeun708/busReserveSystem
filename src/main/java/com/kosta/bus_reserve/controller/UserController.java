@@ -21,7 +21,7 @@ public class UserController { //로그인한 유저의 정보를 가져오는 Re
             // User 클래스를 이용하여 사용자 정보 가져오기
             PrincipalDetail userDetails = (PrincipalDetail) authentication.getPrincipal();
             String userId = userDetails.getUserId(); // 사용자 아이디
-            System.out.println("현재 로그인한 사용자의 아이디: " + userId);
+            System.out.println("UserController-현재 로그인한 사용자의 아이디: " + userId);
             return userId;
         } else {
             // 사용자 정보가 유효하지 않은 경우 또는 사용자가 로그인하지 않은 경우

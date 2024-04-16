@@ -542,6 +542,7 @@
 			var people = seatNo.length;
 			var price = 10000;  //한 사람당 금액
 			var priceFormatted = price.toLocaleString(); // 가격을 천 단위마다 쉼표를 포함한 문자열로 변환
+			totalPrice = price * people;
 
 			var modalContent = "<p><strong>출발지:</strong>[" + startRegion + "]" + startTerminal + "</p>" +
 					"<p><strong>도착지:</strong>[" + endRegion + "]" + endTerminal + "</p>" +
@@ -549,7 +550,7 @@
 					"<p><strong>좌석:</strong> " + seatNo.join('번, ') + "번</p>" +
 					"<p><strong>인원:</strong>" +people + "명</p>" +
 					"<p><strong>출발 일시:</strong> " + departureTime + "</p>"+
-					"<p><strong>금액:</strong> "+price * people+"원 ("+priceFormatted+"원"+"*"+people+"명"+")"+"</p>";
+					"<p><strong>금액:</strong> "+totalPrice+"원 ("+priceFormatted+"원"+"*"+people+"명"+")"+"</p>";
 
 			// 모달 내용 업데이트
 			$('#seatInfoModal .modal-body').html(modalContent);
@@ -557,37 +558,48 @@
 			$('#seatInfoModal').modal('show');
 
 			$('#seatInfoModal .btn-primary').click(function(){
-				// 폼 데이터를 객체로 만듭니다.
-				var formData = {
-					startRegion: startRegion,
-					startTerminal: startTerminal,
-					endTerminal: endTerminal,
-					endRegion: endRegion,
-					busNo: busNo,
-					seatNo: seatNo,
-					people: people,
-					departureTime: departureTime,
-					price: price
-				};
-				// 폼 엘리먼트를 생성하고 값을 설정합니다.
-				var form = document.createElement("form");
-				form.setAttribute("method", "POST");
-				form.setAttribute("action", "/reserve/check-info");
 
-				// 폼 데이터를 폼에 추가합니다.
-				for (var key in formData) {
-					if (formData.hasOwnProperty(key)) {
-						var input = document.createElement("input");
-						input.setAttribute("type", "hidden");
-						input.setAttribute("name", key);
-						input.setAttribute("value", formData[key]);
-						form.appendChild(input);
+				$.ajax({
+					type: 'GET',
+					url: '/getUserId',
+					success: function(userId){
+						console.log("유저아이디:"+userId);
+						// 폼 데이터를 객체로 만듭니다.
+						var formData = {
+							startRegion: startRegion,
+							startTerminal: startTerminal,
+							endTerminal: endTerminal,
+							endRegion: endRegion,
+							busNo: busNo,
+							seatNo: seatNo,
+							people: people,
+							departureTime: departureTime,
+							price: totalPrice,
+							userId: userId
+						};
+						// 폼 엘리먼트를 생성하고 값을 설정합니다.
+						var form = document.createElement("form");
+						form.setAttribute("method", "POST");
+						form.setAttribute("action", "/reserve/check-info");
+
+						// 폼 데이터를 폼에 추가합니다.
+						for (var key in formData) {
+							if (formData.hasOwnProperty(key)) {
+								var input = document.createElement("input");
+								input.setAttribute("type", "hidden");
+								input.setAttribute("name", key);
+								input.setAttribute("value", formData[key]);
+								form.appendChild(input);
+							}
+						}
+
+						// body에 폼을 추가하고 제출합니다.
+						document.body.appendChild(form);
+						form.submit();
+
 					}
-				}
 
-				// body에 폼을 추가하고 제출합니다.
-				document.body.appendChild(form);
-				form.submit();
+				});//end $.ajax
 
 			});//end $('#seatInfoModal .btn-primary').click
 
@@ -596,8 +608,8 @@
 </script>
 
 <script>
-	$(document).ready(function() {  //pre-usedLayer 회원이 이용했던 노선 추가. (로그인 일때)
 
+	$(document).ready(function() {  //pre-usedLayer 회원이 이용했던 노선 추가. (로그인 일때)
 		$.ajax({
 			type: 'GET',
 			url: '/user-authentication',
@@ -610,7 +622,6 @@
 						url: '/getUserId', // 사용자 id를 반환하는 엔드포인트
 						success: function(userId) { //success1
 							console.log("userId:"+ userId);
-
 							$.ajax({
 								type:'POST',
 								url:'/reserve/pre-used-terminal',
