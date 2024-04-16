@@ -76,7 +76,7 @@
 				</sec:authorize>
 			</ul>
 		</div>
-		<div id="logo"><a href="../reserve/reserve_main"><img src="/resources/img/logo.png"/></a></div>
+		<div id="logo"><a href="/reserve/reserve_main"><img src="/resources/img/logo.png"/></a></div>
 		<div id="menu_nav">
 			<ul>
 				<li><a href="../reserve/reserve_main">승차권예매</a></li>
