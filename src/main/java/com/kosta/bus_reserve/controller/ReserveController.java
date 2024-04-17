@@ -63,6 +63,7 @@ public class ReserveController {
                             @RequestParam String people,
                             @RequestParam String departureTime,
                             @RequestParam String price,
+                            @RequestParam String dispatchNo,
                             @RequestParam String userId,
                             HttpSession session) {
 
@@ -75,6 +76,7 @@ public class ReserveController {
         session.setAttribute("seatNo", seatNo);
         session.setAttribute("people", people);
         session.setAttribute("departureTime", departureTime);
+        session.setAttribute("dispatchNo", dispatchNo);
         session.setAttribute("price", price);
 
         if(userId.equals("anonymousUser")){ //비회원 일때
@@ -103,4 +105,5 @@ public class ReserveController {
     /*승차권 예매 취소*/
 
     /*승차권 예매 삭제*/
+
 }

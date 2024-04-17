@@ -22,4 +22,8 @@ public class PayService {
         return mapper.selectUserInfoAndCard(id);
     }
 
+    public String getSeqPay(){
+        return mapper.getSeqPay();
+    }
+
 }

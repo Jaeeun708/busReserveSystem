@@ -11,13 +11,16 @@
 	<!-- ticket_ok_content1 시작 -->
 	<div id="ticket_ok_content1">
 		<!-- 예매 정보 출력 -->
+		<label>dispatch number: ${dispatchNo}</label>
 		<label>Start Region: ${startRegion}</label><br>
 		<label>Start Terminal: ${startTerminal}</label><br>
 		<label>End Region: ${endRegion}</label><br>
 		<label>End Terminal: ${endTerminal}</label><br>
 		<label>Departure Time: ${departureTime}</label><br>
 		<label>Bus No: ${busNo}</label><br>
-		<label>Seat No: ${seatNo}</label><br>
+		<label>
+			Seat No: <c:forEach var="seatNo" items="${seatNo}">${seatNo}번 </c:forEach>
+		</label><br>
 		<label>Price: ${price}</label><br>
 
 		<!-- 결제 정보 출력 -->
