@@ -5,35 +5,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
-<style>
-	.scrollable-content {
-		background-color: #f2f2f2; /* 배경색 설정 */
-		padding: 10px; /* 약관 내용과의 간격 조절 */
-		border-radius: 5px; /* 모서리를 둥글게 만듦 */
-	}
-
-	/* 비회원 정보 입력 섹션의 상단 마진을 추가하여 바닥에서 좀 떨어지게 함 */
-	.mt-bottom {
-		margin-bottom: 20px; /* 원하는 크기의 상단 마진 설정 */
-	}
-
-	/* 로그인을 강조하는 스타일 */
-	#page_title h5 {
-		font-family: Arial, sans-serif; /* 원하는 글꼴로 변경 */
-		font-size: 20px; /* 원하는 폰트 크기로 변경 */
-		font-weight: bold; /* 강조하는 글꼴 스타일 */
-		color: #333; /* 텍스트 색상 변경 */
-	}
-</style>
-
-<div id="page_title">
-	<h5>승차권 예매 > <span style="color: #007bff;">로그인</span></h5> <!-- 로그인 텍스트를 강조하는 스타일로 변경 -->
-</div>
 
 <div class="container">
-	<!-- 로그인 섹션 위에 텍스트 추가 -->
-	<div class="row justify-content-start"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
-		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
+	<div class="row justify-content-start">
+		<div class="col-md-5 text-left">
 			<p>회원 예매를 하시려면 로그인해 주세요.</p>
 		</div>
 	</div>
@@ -50,7 +25,7 @@
 						<div class="form-group mt-2">
 							<input type="password" name="password" class="form-control" placeholder="비밀번호" required>
 						</div>
-						<div class="form-group mt-2"> <!-- mt-3 클래스 추가 -->
+						<div class="form-group mt-2">
 							<button type="submit" class="btn btn-primary btn-block">로그인</button>
 						</div>
 					</form>
@@ -59,8 +34,8 @@
 		</div>
 	</div>
 
-	<div class="row justify-content-start mt-3"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
-		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
+	<div class="row justify-content-start mt-3">
+		<div class="col-md-5 text-left">
 			<p>비회원 예매를 하시려면 약관에 동의하고 정보를 입력해주세요.</p>
 		</div>
 	</div>
@@ -259,9 +234,9 @@
 	</div>
 
 	<!-- 전체 동의 체크박스 -->
-	<div class="row justify-content-end mt-3"> <!-- justify-content-end를 사용하여 가장 오른쪽 정렬 -->
-		<div class="col-md-6"> <!-- 전체 동의 체크박스의 컬럼 크기를 유지 -->
-			<div class="custom-control custom-checkbox d-flex justify-content-end"> <!-- d-flex와 justify-content-end를 사용하여 내부의 컨텐츠를 오른쪽 정렬 -->
+	<div class="row justify-content-end mt-3">
+		<div class="col-md-6">
+			<div class="custom-control custom-checkbox d-flex justify-content-end">
 				<input type="checkbox" class="custom-control-input" id="checkAllCheckbox" onclick="checkAll()">
 				<label class="custom-control-label" for="checkAllCheckbox">전체 약관에 동의합니다.</label>
 			</div>

@@ -537,3 +537,54 @@ div.bg-white{
 	color:#000000;
 }
 
+/*결제로그인페이지*/
+.scrollable-content {
+	background-color: #f2f2f2;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+.mt-bottom {
+	margin-bottom: 20px;
+}
+
+/*결제완료페이지*/
+#ticket_container {
+	background-color: #dcdcdc;
+	padding: 20px;
+	border-radius: 10px;
+}
+#successText {
+	margin-top: 120px;
+	text-align: center;
+}
+
+#ticket_ok_content1 {
+	text-align: center;
+}
+#ok_h1 {
+	margin-bottom: 20px;
+}
+#ok_h4-1, #ok_h4-2 {
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+#ok_table-1, #ok_table-2 {
+	width: 100%;
+	border-collapse: collapse;
+	margin-bottom: 20px;
+	text-align: center;
+}
+#ok_tr-th-1, #ok_tr-th-2, #ok_tr-td-1, #ok_tr-td-2 {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+}
+
+#ok_reserveSearch {
+	margin-top: 20px;
+}
+
+/*결제페이지*/
+
+

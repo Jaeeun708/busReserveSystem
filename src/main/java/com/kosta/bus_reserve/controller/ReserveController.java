@@ -82,10 +82,8 @@ public class ReserveController {
         if(userId.equals("anonymousUser")){ //비회원 일때
             return "redirect:reserve_login";
         }
-
         //회원일때
         return ("redirect:reserve_pay/"+userId);
-
     }
 
     @PostMapping("/pre-used-terminal")

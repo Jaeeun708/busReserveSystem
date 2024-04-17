@@ -17,7 +17,7 @@ public class PayRestController {
 
     private PayService service;
 
-//    //결제정보를 입력하는 메서드
+    //결제정보를 입력하는 메서드
     @PostMapping("reserve_pay_ok")
     public ResponseEntity<String> createPay(@RequestBody PayDTO dto) {
 
@@ -34,4 +34,5 @@ public class PayRestController {
     public UserVO infos(@PathVariable String id) {
         return service.userAndCardInfo(id);
     }
+
 }
