@@ -5,6 +5,30 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!-- header -->
 <%@include file="../includes/header.jsp"%>
+<style>
+	.scrollable-content {
+		background-color: #f2f2f2; /* 배경색 설정 */
+		padding: 10px; /* 약관 내용과의 간격 조절 */
+		border-radius: 5px; /* 모서리를 둥글게 만듦 */
+	}
+
+	/* 비회원 정보 입력 섹션의 상단 마진을 추가하여 바닥에서 좀 떨어지게 함 */
+	.mt-bottom {
+		margin-bottom: 20px; /* 원하는 크기의 상단 마진 설정 */
+	}
+
+	/* 로그인을 강조하는 스타일 */
+	#page_title h5 {
+		font-family: Arial, sans-serif; /* 원하는 글꼴로 변경 */
+		font-size: 20px; /* 원하는 폰트 크기로 변경 */
+		font-weight: bold; /* 강조하는 글꼴 스타일 */
+		color: #333; /* 텍스트 색상 변경 */
+	}
+</style>
+
+<div id="page_title">
+	<h5>승차권 예매 > <span style="color: #007bff;">로그인</span></h5> <!-- 로그인 텍스트를 강조하는 스타일로 변경 -->
+</div>
 
 <div class="container">
 	<div class="row justify-content-start">
@@ -18,6 +42,7 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<h2 class="text-center mb-4">회원 로그인</h2>
+                    <!-- TODO: action="/login 맞는지 확인 -->
 					<form id="memberForm" method="post" action="/login">
 						<div class="form-group">
 							<input type="text" name="username" id="userId" class="form-control" placeholder="아이디" required>
@@ -33,9 +58,8 @@
 			</div>
 		</div>
 	</div>
-
-	<div class="row justify-content-start mt-3">
-		<div class="col-md-5 text-left">
+	<div class="row justify-content-start mt-3"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
+		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
 			<p>비회원 예매를 하시려면 약관에 동의하고 정보를 입력해주세요.</p>
 		</div>
 	</div>
