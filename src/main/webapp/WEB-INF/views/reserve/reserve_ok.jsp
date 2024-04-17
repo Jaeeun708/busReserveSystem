@@ -17,7 +17,6 @@
 <div id="successText">
 	<h1 id="ok_h1">예매가 완료되었습니다.</h1>
 </div>
-
 <div id="ticket_container" class="container">
 	<div id="ticket_ok_content1" >
 		<h4 id="ok_h4-1">예매 정보</h4>
@@ -44,7 +43,6 @@
 				<td>${price} 원</td>
 			</tr>
 		</table>
-
 		<h4 id="ok_h4-2">결제 정보</h4>
 		<table class="table table-shadow" id="ok_table-2">
 			<tr id="ok_tr-th-2">

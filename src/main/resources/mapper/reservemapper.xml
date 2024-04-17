@@ -97,4 +97,8 @@
         GROUP BY
             p.id, tm.terminal_name, tm2.terminal_name, p.payment_date, di.departure_time, b.bus_type, p.amount, t.ticket_status
     </select>
+
+    <insert id="insertTicket">
+        insert into ticket values (seq_ticket.nextval, #{payNo}, #{dispatchNo}, #{id}, #{seatNo}, #{ticketStatus})
+    </insert>
 </mapper>

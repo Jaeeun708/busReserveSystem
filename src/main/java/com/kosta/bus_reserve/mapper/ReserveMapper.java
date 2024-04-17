@@ -25,5 +25,6 @@ public interface ReserveMapper {
 
     //사용자 id로 예약내역 불러오기
 
+    public int insertTicket(TicketVO ticketVO);
 
 }
