@@ -43,12 +43,12 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<h2 class="text-center mb-4">회원 로그인</h2>
-					<form id="memberForm" method="post">
+					<form id="memberForm" method="post" action="/login">
 						<div class="form-group">
-							<input type="text" name="id" id="userId" class="form-control" placeholder="아이디" required>
+							<input type="text" name="username" id="userId" class="form-control" placeholder="아이디" required>
 						</div>
 						<div class="form-group mt-2">
-							<input type="password" name="userName" class="form-control" placeholder="비밀번호" required>
+							<input type="password" name="password" class="form-control" placeholder="비밀번호" required>
 						</div>
 						<div class="form-group mt-2"> <!-- mt-3 클래스 추가 -->
 							<button type="submit" class="btn btn-primary btn-block">로그인</button>
@@ -58,6 +58,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div class="row justify-content-start mt-3"> <!-- 로그인 섹션 위에 추가하고, 시작부터 정렬 -->
 		<div class="col-md-5 text-left"> <!-- col-md-5 사용하여 가로 크기 지정, text-left로 텍스트 왼쪽 정렬 -->
 			<p>비회원 예매를 하시려면 약관에 동의하고 정보를 입력해주세요.</p>

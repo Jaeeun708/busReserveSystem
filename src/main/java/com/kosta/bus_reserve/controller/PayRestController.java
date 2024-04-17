@@ -29,22 +29,6 @@ public class PayRestController {
                 : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-//    //결제정보를 입력하는 메서드
-//    @PostMapping("reserve_pay_ok")
-//    public ResponseEntity<String> createPay(@RequestBody PayDTO dto, HttpSession session) {
-//
-//        System.out.println("restController: " + dto);
-//
-//        int insertCount = service.addPay(dto);
-//
-//        // 결제가 성공했을 때 세션에 payNo와 paymentDate 저장
-//        session.setAttribute("payNo", dto.getPayNo());
-//        session.setAttribute("paymentDate", dto.getPaymentDate());
-//
-//        return insertCount == 1 ? new ResponseEntity<>("success", HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//    }
-
     //유저와 카드의 정보를 가져오는 메서드
     @GetMapping("getInfo/{id}")
     public UserVO infos(@PathVariable String id) {

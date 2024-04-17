@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="/resources/css/busStyle.css" type="text/css">
 
 <!-- 자바스크립트 부분(개인) -->
-<script src="/resources/js/manager.js"></script>
+<%--<script src="/resources/js/manager.js"></script>--%>
 <script src="/resources/js/reserve.js"></script>
 <!-- <script src="/resources/js/pay.js"></script> -->
 </head>
