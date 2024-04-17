@@ -1,280 +1,286 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+         pageEncoding="UTF-8" %>
 <!-- jstl -->
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!-- header -->
-<%@include file="../includes/header.jsp"%>
-
-	<div id="page_title">
-		<h5>승차권 예매 > 결제</h5>
-	</div>
-
-<p>[${startRegion}]${startTerminal}</p>
-<p>[${endRegion}]${endTerminal}</p>
-<p>${busNo}</p>
-<p>${seatNo}</p>
-<p>${departureTime}</p>
-
-
+<%@include file="../includes/header.jsp" %>
 <style>
-	/* 생년월일 입력란 */
-	#birth {
-		text-align: center; /* 텍스트 가운데 정렬 */
-		width: 120px; /* 넓이 설정 */
-		height: 30px; /* 높이 설정 */
-	}
+    #reserve_pay_content1 {
+        margin-top: 120px;
+    }
 
-	/* 카드번호 입력란 */
-	#cardNumberInputs {
-		display: flex; /* Flexbox 사용 */
-	}
+    #birthText, #selectId, #cardText {
+        float: left;
+    }
 
-	#cardNumberInputs input {
-		text-align: center; /* 텍스트 가운데 정렬 */
-		width: 70px; /* 넓이 설정 */
-		height: 30px; /* 높이 설정 */
-		margin-right: 5px; /* 각 카드번호 입력란 사이 간격 설정 */
-	}
+    #cardText {
+        clear: both;
+    }
 
-	/* 만료월, 만료년도 선택란 */
-	#cardDropdownMonth,
-	#cardDropdownYear {
-		width: 70px; /* 넓이 설정 */
-		height: 30px; /* 높이 설정 */
-	}
+    #birth {
+        margin-bottom: 50px;
+    }
 
-	/* 전체 섹션 스타일 */
-	#reserve_pay_content1 {
-		margin: 20px auto; /* 가운데 정렬 */
-		width: 60%; /* 넓이 설정 */
-		padding: 20px; /* 내부 여백 설정 */
-		background-color: #f8f9fa; /* 배경색 설정 */
-		border-radius: 10px; /* 테두리 모서리를 둥글게 만듦 */
-		box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 음영 효과 추가 */
-	}
+    #pay_payInfo-3 {
+        background-color: #dcdcdc;
+        padding: 20px;
+        border-radius: 10px; /* Adjust the value as needed */
+    }
+
+    #dispatchText {
+        text-align: center;
+    }
+
+    .form-control {
+        width: 120px; /* 한 줄에 4개의 입력 필드가 들어가도록 너비 설정 */
+        display: inline-block; /* 인라인 요소로 표시하여 한 줄에 배열 */
+    }
+
+    .pay_label {
+        margin-top: 6px;
+        margin-right: 15px;
+    }
+
+    #birthTextInfo {
+        height: 60px;
+    }
 </style>
 
 <!-- reserve_pay_content1 시작 -->
-<div id="reserve_pay_content1" class="row justify-content-center"> <!-- 수정된 부분 -->
-	<div class="col-md-6"> <!-- 추가된 부분 -->
-		<div id="reservation_details" class="p-3 mb-3 bg-light rounded">
-			<p id="people">${people} 명</p>
-			<p id="price">${price} 원</p>
-			<p id="totalPrice"></p>
-		</div>
-	</div>
-	<div class="col-md-6"> <!-- 추가된 부분 -->
-		<form method="post" action="reserve_pay_ok" class="needs-validation" novalidate>
-			<input type="hidden" name="payNo" value="${payNo}">
-			<input type="hidden" name="id" id="userId" value="${id}">
-			<!--<input type="hidden" name="amount" value="${price}">-->
-			<input type="hidden" name="paymentDate" value="${paymentDate}">
-			<input type="hidden" name="payStatus" value="${payStatus}">
-			<input type="hidden" id="cardName" value="${cardName}">
-			<div class="form-row">
-				<div class="col-md-6 mb-3">
-					<label class="col-form-label">생년월일 (8자리)</label>
-					<input type="text" name="birth" id="birth" class="form-control form-control-sm" placeholder="예) 19900101" maxlength="8" value="${birth}" pattern="\d{8}" required>
-				</div>
-				<div class="col-md-6 mb-3 text-right">
-					<div class="form-row" id="cardNumberInputs">
-						<label class="col-form-label">카드번호</label>
-						<input type="text" id="cardNo1" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
-						<input type="text" id="cardNo2" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
-						<input type="text" id="cardNo3" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
-						<input type="text" id="cardNo4" name="cardNo" class="form-control form-control-sm" placeholder="0000" maxlength="4" pattern="\d{4}" required>
-					</div>
-				</div>
-			</div>
-			<div class="form-row">
-				<div class="col-md-6 mb-3 text-left">
-					<label for="cardDropdownMonth" class="col-form-label">만료월</label>
-					<select id="cardDropdownMonth" class="custom-select custom-select-sm" required>
-						<option value="">월</option>
-						<option value="01">01</option>
-						<option value="02">02</option>
-						<option value="03">03</option>
-						<option value="04">04</option>
-						<option value="05">05</option>
-						<option value="06">06</option>
-						<option value="07">07</option>
-						<option value="08">08</option>
-						<option value="09">09</option>
-						<option value="10">10</option>
-						<option value="11">11</option>
-						<option value="12">12</option>
-					</select>
-					<label for="cardDropdownYear" class="col-form-label">만료년도</label>
-					<select id="cardDropdownYear" class="custom-select custom-select-sm" required>
-						<option value="">년</option>
-						<!-- Populate years dynamically using JavaScript -->
-					</select>
-				</div>
-			</div>
-			<input type="hidden" name="phoneNo" id="phoneNo" class="form-control form-control-sm" placeholder="핸드폰번호" value="${phoneNo}">
-			<button type="submit" id="payInsert" class="btn btn-primary btn-sm">제출</button>
-		</form>
-	</div>
+<div id="reserve_pay_content1">
+    <div id="pay_reserveInfo">
+        <h5>예매정보</h5>
+        <div id="dispatchText">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>출발지</th>
+                    <th>도착지</th>
+                    <th>출발일</th>
+                    <th>버스 번호</th>
+                    <th>좌석 번호</th>
+                    <th>승객 수</th>
+                    <th>금액</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>[${startRegion}]${startTerminal}</td>
+                    <td>[${endRegion}]${endTerminal}</td>
+                    <td>${departureTime}</td>
+                    <td>${busNo}</td>
+                    <td>
+                        <c:forEach var="seat" items="${seatNo}" varStatus="loop">
+                            <c:out value="${seat}"/>
+                            <c:if test="${not loop.last}">, </c:if>
+                        </c:forEach>
+                    </td>
+                    <td>${people}</td>
+                    <td>${price}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="pay_payInfo-2">
+        <h5>결제정보</h5>
+        <div id="pay_payInfo-3">
+            <form method="post" action="reserve_pay_ok">
+                <input type="hidden" name="payNo" value="${payNo }">
+                <input type="hidden" name="id" id="userId" value="${id }">
+                <input type="hidden" name="paymentDate" value="${paymentDate }">
+                <input type="hidden" name="payStatus" value="${payStatus }">
+                <div id="birthText">
+                    <label class="pay_label">생년월일 8자리</label>
+                </div>
+                <div id="birthTextInfo">
+                    <input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth }"
+                           pattern="\d{8}" class="form-control">
+                </div>
+                <div id="cardText">
+                    <label class="pay_label">카드번호 16자리</label>
+                </div>
+                <div id="cardTextInfo">
+                    <input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+                           class="form-control"> -
+                    <input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+                           class="form-control"> -
+                    <input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+                           class="form-control"> -
+                    <input type="text" id="cardNo4" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+                           class="form-control">
+                </div>
+                <br>
+                <div id="selectId">
+                    <label class="pay_label">유효기간</label>
+                </div>
+                <div id="selectMonthAndYear">
+                    <select id="cardDropdownMonth" class="form-control">
+                        <option value="01">01</option>
+                        <option value="02">02</option>
+                        <option value="03">03</option>
+                        <option value="04">04</option>
+                        <option value="05">05</option>
+                        <option value="06">06</option>
+                        <option value="07">07</option>
+                        <option value="08">08</option>
+                        <option value="09">09</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                    </select>
+                    <label for="cardDropdownMonth">월</label>
+                    &emsp;
+                    <select id="cardDropdownYear" class="form-control"></select>
+                    <label for="cardDropdownYear">년</label>
+                </div>
+                <br>
+                <input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">
+                <button type="submit" id="payInsert" class="btn btn-primary">제출</button>
+            </form>
+        </div>
+    </div>
 </div>
 
-	<!-- reserve_pay_content1 끝 -->
+<!-- reserve_pay_content1 끝 -->
 <script type="text/javascript" src="/resources/js/pay.js"></script>
 <script type="text/javascript">
-	// 현재 년도를 가져오는 함수
-	function getYear() {
-		var date = new Date();
-		return date.getFullYear();
-	}
+    // 현재 년도를 가져오는 함수
+    function getYear() {
+        var date = new Date();
+        return date.getFullYear();
+    }
 
-	// 현재 년도부터 10년 후까지의 옵션을 생성하여 select 요소에 추가
-	function addYearsDropdown() {
-		var dropdown = document.getElementById("cardDropdownYear");
-		var currentYear = getYear();
+    // 현재 년도부터 10년 후까지의 옵션을 생성하여 select 요소에 추가
+    function addYearsDropdown() {
+        var dropdown = document.getElementById("cardDropdownYear");
+        var currentYear = getYear();
 
-		for (var i = 0; i <= 10; i++) {
-			var year = currentYear + i;
-			var option = document.createElement("option");
-			option.text = year;
-			option.value = year;
-			dropdown.add(option);
-		}
-	}
+        for (var i = 0; i <= 10; i++) {
+            var year = currentYear + i;
+            var option = document.createElement("option");
+            option.text = year;
+            option.value = year;
+            dropdown.add(option);
+        }
+    }
 
-	// 생년월일을 "xxxxxxxx" 형식으로 변환
-	function formatBirth(birth) {
-		var parts = birth.replace(/[-\s]/g, "").split(" ");
-		var date = parts[0];
-		var formattedDate = date.slice(0, 8);
-		return formattedDate;
-	}
+    // 생년월일을 "xxxxxxxx" 형식으로 변환
+    function formatBirth(birth) {
+        var parts = birth.replace(/[-\s]/g, "").split(" ");
+        var date = parts[0];
+        var formattedDate = date.slice(0, 8);
+        return formattedDate;
+    }
 
-	function calculateTotalPrice() {
-		var price = parseInt($("#price").text().replace(' 원', '')); // 가격 가져오기
-		var people = parseInt($("#people").text().replace(' 명', '')); // 인원 가져오기
-		var totalPrice = price * people; // 총 가격 계산
-		$("#totalPrice").text(totalPrice.toLocaleString() + ' 원'); // totalPrice에 출력
-	}
+    $(document).ready(function () {
 
-	// 페이지 로드 시 실행
-	$(document).ready(function(){
+        addYearsDropdown(); // 현재 년도부터 10년 후까지의 옵션을 추가
 
-		addYearsDropdown(); // 현재 년도부터 10년 후까지의 옵션을 추가
+        var id = $("#userId").val(); // 입력된 ID 값 가져오기
 
-		var id = $("#userId").val(); // 입력된 ID 값 가져오기
+        $.getJSON('/reserve/getInfo/' + id, function (data) {
+            $("#birth").val(data.birth);
+            $("#phoneNo").val(data.phoneNo);
 
-		$.getJSON('/reserve/getInfo/' + id, function(data) {
-			$("#birth").val(data.birth);
-			$("#phoneNo").val(data.phoneNo);
+            // 생년월일을 변환하여 입력 필드에 설정
+            var birth = $("#birth").val();
+            var formattedBirth = formatBirth(birth);
+            $("#birth").val(formattedBirth);
 
-			if (data.myCardVO && data.myCardVO.cardName) {
-				$("#cardName").val(data.myCardVO.cardName);
-			}
+            // 카드 정보가 있다면 설정
+            if (data.myCardVO) {
+                var cardNo = data.myCardVO.cardNo;
+                $("#cardNo1").val(cardNo.slice(0, 4));
+                $("#cardNo2").val(cardNo.slice(5, 9));
+                $("#cardNo3").val(cardNo.slice(10, 14));
+                $("#cardNo4").val(cardNo.slice(15, 19));
+            } // end if
+        }); //end getJson
+    }); //end ready
 
-			// 생년월일을 변환하여 입력 필드에 설정
-			var birth = $("#birth").val();
-			var formattedBirth = formatBirth(birth);
-			$("#birth").val(formattedBirth);
+    $("#payInsert").on("click", function (e) {
+        e.preventDefault();
 
-			// 카드 정보가 있다면 설정
-			if (data.myCardVO) {
-				var cardNo = data.myCardVO.cardNo;
-				$("#cardNo1").val(cardNo.slice(0, 4));
-				$("#cardNo2").val(cardNo.slice(5, 9));
-				$("#cardNo3").val(cardNo.slice(10, 14));
-				$("#cardNo4").val(cardNo.slice(15, 19));
-			} // end if
-		}); //end getJson
+        //카드와 생년월일에 대한 유효성 검사
+        var cardNoPattern = /^\d{4}$/;
+        var birthPattern = /^\d{8}$/;
 
+        var cardNo1 = $("#cardNo1").val();
+        var cardNo2 = $("#cardNo2").val();
+        var cardNo3 = $("#cardNo3").val();
+        var cardNo4 = $("#cardNo4").val();
+        var birth = $("input[name='birth']").val();
+        var cardNo = cardNo1 + cardNo2 + cardNo3 + cardNo4;
 
+        if (!cardNoPattern.test(cardNo1) || !cardNoPattern.test(cardNo2) ||
+            !cardNoPattern.test(cardNo3) || !cardNoPattern.test(cardNo4)) {
+            alert("카드번호를 16자리 숫자로 입력하세요.");
+            return;
+        }
 
-	}); //end ready
+        if (!birthPattern.test(birth)) {
+            alert("생년월일을 8자리 숫자로 입력하세요.");
+            e.preventDefault();
+            return;
+        }
 
-	$("#payInsert").on("click", function(e) {
-		e.preventDefault();
+        function formatCardNo(cardNo) {
+            return cardNo.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1-$2-$3-$4');
+        }
 
-		//카드와 생년월일에 대한 유효성 검사
-		var cardNoPattern = /^\d{4}$/;
-		var birthPattern = /^\d{8}$/;
+        function formatPhoneNo(phoneNo) {
+            return phoneNo.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        }
 
-		var cardNo1 = $("#cardNo1").val();
-		var cardNo2 = $("#cardNo2").val();
-		var cardNo3 = $("#cardNo3").val();
-		var cardNo4 = $("#cardNo4").val();
-		var birth = $("input[name='birth']").val();
+        function formatDate(birth) {
+            return birth.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
+        }
 
-		var cardNo = cardNo1 + cardNo2 + cardNo3 + cardNo4;
+        if ($("input[name='id']").val() == "") {
+            //ajax에 입력될 데이터들 입력
+            var pay = {
+                payNo: $("input[name='payNo']").val(),
+                id: "nonmember",
+                amount: $("input[name='price']").val(),
+                paymentDate: $("input[name='paymentDate']").val(),
+                payStatus: "승인",
+                cardNo: formatCardNo(cardNo),
+                birth: formatDate(birth),
+                phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
+            };
 
-		if (!cardNoPattern.test(cardNo1) || !cardNoPattern.test(cardNo2) ||
-				!cardNoPattern.test(cardNo3) || !cardNoPattern.test(cardNo4)) {
-			alert("카드번호를 16자리 숫자로 입력하세요.");
-			return;
-		}
+            console.log(pay);
 
-		if (!birthPattern.test(birth)) {
-			alert("생년월일을 8자리 숫자로 입력하세요.");
-			e.preventDefault();
-			return;
-		}
+        } else {
+            var pay = {
+                payNo: $("input[name='payNo']").val(),
+                id: $("input[name='id']").val(),
+                amount: $("input[name='price']").val(),
+                paymentDate: $("input[name='paymentDate']").val(),
+                payStatus: "승인",
+                cardNo: formatCardNo(cardNo),
+                birth: formatDate(birth),
+                phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
+            };
 
-		function formatCardNo(cardNo) {
-			return cardNo.replace(/(\d{4})(\d{4})(\d{4})(\d{4})/, '$1-$2-$3-$4');
-		}
+            console.log(pay);
+        } //end else
 
-		function formatPhoneNo(phoneNo) {
-			return phoneNo.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
-		}
-
-		function formatDate(birth) {
-			return birth.replace(/(\d{4})(\d{2})(\d{2})/, '$1-$2-$3');
-		}
-
-		if ($("input[name='id']").val() == "") {
-			//ajax에 입력될 데이터들 입력
-			var pay = {
-				payNo: $("input[name='payNo']").val(),
-				id: "nonmember",
-				amount: parseInt($("#price").text()) * parseInt($("#people").text()),
-				paymentDate: $("input[name='paymentDate']").val(),
-				payStatus: "승인",
-				cardNo: formatCardNo(cardNo),
-				birth: formatDate(birth),
-				phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
-			};
-
-			console.log(pay);
-
-			//ajax 메서드 호출 및 입력한 데이터들 삽입
-			// payInsertService.insert(pay, function(result) {
-			// 	console.log("결제가 성공적으로 등록되었습니다.");
-			// });
-		} else {
-			var pay = {
-				payNo: $("input[name='payNo']").val(),
-				id: $("input[name='id']").val(),
-				amount: parseInt($("#price").text()) * parseInt($("#people").text()),
-				paymentDate: $("input[name='paymentDate']").val(),
-				payStatus: "승인",
-				cardNo: formatCardNo(cardNo),
-				birth: formatDate(birth),
-				phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
-			};
-
-			console.log(pay);
-
-			// payInsertService.insert(pay, function(result) {
-			// 	console.log("결제가 성공적으로 등록되었습니다.");
-			// });
-		} //end else
-	}); //end clickEvent
+        payInsertService.insert(pay, function (result) {
+            console.log("결제가 성공적으로 등록되었습니다.");
+        });
+    }); //end clickEvent
 
 </script>
 
 <!-- JS 부트스트랩 적용 -->
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-		crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
 <!-- footer -->
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../includes/footer.jsp" %>

@@ -1,8 +1,11 @@
 package com.kosta.bus_reserve.controller;
 
+import com.kosta.bus_reserve.config.auth.PrincipalDetail;
 import com.kosta.bus_reserve.service.MemberService;
 import com.kosta.bus_reserve.service.PayService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -62,7 +65,6 @@ public class PayController {
 
     @GetMapping("reserve_ok")
     public String endRegisterPay(Model model, HttpSession session) {
-
 
         model.addAttribute("startRegion", session.getAttribute("startRegion"));
         model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
