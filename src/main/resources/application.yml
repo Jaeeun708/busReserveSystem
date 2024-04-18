@@ -11,8 +11,8 @@ spring:
     url: jdbc:oracle:thin:@localhost:1521:XE
 
 
-    username: practice2
-    password: 2222
+    username: bus1234
+    password: 1234
 
   mvc:
     view:

@@ -122,7 +122,7 @@
 	</div>
 	<!-- reserve_pay_content1 끝 -->
 
-<%--<div id="pay_payInfo-2">--%> TODO: 내용 확인후 삭제여부 판다!
+<%--&lt;%&ndash;<div id="pay_payInfo-2">&ndash;%&gt; <%--TODO: 내용 확인후 삭제여부 판다!&ndash;%&gt;--%>
 <%--    <h5>결제정보</h5>--%>
 <%--    <div id="pay_payInfo-3">--%>
 <%--        <form method="post" action="reserve_pay_ok">--%>
@@ -285,81 +285,73 @@
 			success: function(seqPay) {
 				console.log("결제번호 시퀀스:" + seqPay);
 
-				if ($("input[name='id']").val() == "") { //비회원일 때
-					var pay = {
-						payNo: seqPay,
-						id: "nonmember",
-						amount: ${price},
-						paymentDate: $("input[name='paymentDate']").val(),
-						payStatus: "승인",
-						cardNo: formatCardNo(cardNo),
-						birth: formatDate(birth),
-						phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
-					};
-					console.log(pay);
-				} else {  //회원일때
-					var pay = {
-						payNo: seqPay,
-						id: $("input[name='id']").val(),
-						amount: ${price},
-						paymentDate: $("input[name='paymentDate']").val(),
-						payStatus: "승인",
-						cardNo: formatCardNo(cardNo),
-						birth: formatDate(birth),
-						phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
-					};
-					console.log(pay);
-				} //end else
-
-				//pay - ajax 메서드 호출
-				payInsertService.insert(pay, function (result) { // resources/pay.js
-					console.log("결제가 성공적으로 등록되었습니다.");
-				});
-
 				var userId = "nonmember";
 				<sec:authorize access="isAuthenticated()">
-					 userId = "${pageContext.request.userPrincipal != null ? pageContext.request.userPrincipal.getName() : 'nonmember'}"
+				userId = "${pageContext.request.userPrincipal != null ? pageContext.request.userPrincipal.getName() : 'nonmember'}"
 				</sec:authorize>
 
 				console.log("유저아이디: "+userId);
 
-				var stringArray = [];
+				var pay = {
+					payNo: seqPay,
+					id: userId,
+					amount: ${price},
+					paymentDate: $("input[name='paymentDate']").val(),
+					payStatus: "승인",
+					cardNo: formatCardNo(cardNo),
+					birth: formatDate(birth),
+					phoneNo: formatPhoneNo($("input[name='phoneNo']").val())
+				};
 
-				<c:forEach items="${seatNo}" var="item">   //좌석번호가 자바배열이라, 자바스크립트 배열로 변환
+				console.log(pay);
+
+				//pay - ajax 메서드 호출
+				payInsertService.insert(pay, function (result) { // resources/pay.js
+					console.log("결제가 성공적으로 등록되었습니다.");
+
+
+					console.log("해당 결제정보를 바탕으로 티켓 예약 시작");
+					var stringArray = [];
+
+					<c:forEach items="${seatNo}" var="item">   //좌석번호가 자바배열이라, 자바스크립트 배열로 변환
 					console.log("${item}");
 					stringArray.push("${item}");
-				</c:forEach>
+					</c:forEach>
 
-				var numArray = stringArray.map(Number);
-				console.log(numArray);
+					var numArray = stringArray.map(Number);
+					console.log(numArray);
 
-				var ticketList =[];
-				numArray.forEach(function(seatNo){
-					var ticket = {
-						ticketNo: "",
-						payNo: seqPay,
-						dispatchNo: ${dispatchNo},
-						id: userId,
-						seatNo: seatNo,
-						ticketStatus: "예매완료"
-					}
-					ticketList.push(ticket);
-				});
+					var ticketList =[];
+					numArray.forEach(function(seatNo){
+						console.log("ticket 에 들어갈 seq_pay: "+ seqPay);
+						var ticket = {
+							ticketNo: "",
+							payNo: seqPay,
+							dispatchNo: ${dispatchNo},
+							id: userId,
+							seatNo: seatNo,
+							ticketStatus: "예매완료"
+						}
+						ticketList.push(ticket);
+					});
 
-				console.log(ticketList);
+					console.log(ticketList);
 
-				$.ajax({
-					type: "post",
-					url: "/reserve/ticket",
-					contentType: "application/json",
-					data: JSON.stringify(ticketList),
-					success:function(result){
-						console.log("요청 성공! 응답 데이터: " + result);
-					}, error: function(xhr, status, error) {
-						// 요청이 실패했을 때 실행되는 콜백 함수입니다.
-						console.error("요청 실패: " + error);
-					}
-				});
+					$.ajax({
+						type: "post",
+						url: "/reserve/ticket",
+						contentType: "application/json",
+						data: JSON.stringify(ticketList),
+						success:function(result){
+							console.log("요청 성공! 응답 데이터: " + result);
+						}, error: function(xhr, status, error) {
+							// 요청이 실패했을 때 실행되는 콜백 함수입니다.
+							console.error("요청 실패: " + error);
+						}
+					});
+
+
+				});//end payInsertService.insert(pay, function (result) {
 
 			}//end success
 		});//end $.ajax

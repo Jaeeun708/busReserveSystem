@@ -4,6 +4,8 @@ var payInsertService = (function () {
     console.log("add pay........");
 
     function insert(pay, callback, error) {
+        console.log("pay.js 의 pay" + pay);
+        console.log("pay.js 의 payNo"+pay.payNo);
         $.ajax({
             url: '/reserve/reserve_pay_ok',
             type: 'post',
