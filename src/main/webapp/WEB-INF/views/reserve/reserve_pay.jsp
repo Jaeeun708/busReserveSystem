@@ -6,180 +6,122 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- header -->
 <%@include file="../includes/header.jsp" %>
+
 <style>
-    #reserve_pay_content1 {
-        margin-top: 120px;
-    }
-
-    #birthText, #selectId, #cardText {
-        float: left;
-    }
-
-    #cardText {
-        clear: both;
-    }
-
-    #birth {
-        margin-bottom: 50px;
-    }
-
-    #pay_payInfo-3 {
-        background-color: #dcdcdc;
-        padding: 20px;
-        border-radius: 10px; /* Adjust the value as needed */
-    }
-
-    #dispatchText {
-        text-align: center;
-    }
-
-    .form-control {
-        width: 120px; /* 한 줄에 4개의 입력 필드가 들어가도록 너비 설정 */
-        display: inline-block; /* 인라인 요소로 표시하여 한 줄에 배열 */
-    }
-
-    .pay_label {
-        margin-top: 6px;
-        margin-right: 15px;
-    }
-
-    #birthTextInfo {
-        height: 60px;
-    }
+	.form-control {
+		width: 120px;
+		display: inline-block;
+	}
 </style>
-	<div id="page_title">
-		<h5>승차권 예매 > 결제</h5>
+
+<!-- reserve_pay_content1 시작 -->
+<div id="reserve_pay_content1">
+	<div id="pay_reserveInfo">
+		<h5>예매정보</h5>
+		<div id="dispatchText">
+			<table class="table table-bordered">
+				<thead>
+				<tr>
+					<th>출발지</th>
+					<th>도착지</th>
+					<th>출발일</th>
+					<th>버스 번호</th>
+					<th>좌석 번호</th>
+					<th>승객 수</th>
+					<th>금액</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr>
+					<td>[${startRegion}]${startTerminal}</td>
+					<td>[${endRegion}]${endTerminal}</td>
+					<td>${departureTime}</td>
+					<td>${busNo}</td>
+					<td>
+						<c:forEach var="seat" items="${seatNo}" varStatus="loop">
+							<c:out value="${seat}"/>
+							<c:if test="${not loop.last}">, </c:if>
+						</c:forEach>
+					</td>
+					<td>${people}</td>
+					<td>${price}</td>
+				</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
 
-<div class="shadow p-3 mb-5 bg-white rounded">
-	<table class="table table-bordered">
-		<thead>
-		<tr>
-			<th>배차번호</th>
-			<th>출발지</th>
-			<th>도착지</th>
-			<th>버스 번호</th>
-			<th>좌석 번호</th>
-			<th>승객 수</th>
-			<th>출발 시간</th>
-			<th>가격</th>
-		</tr>
-		</thead>
-		<tbody>
-		<tr>
-			<td>${dispatchNo}</td>
-			<td>[${startRegion}]${startTerminal}</td>
-			<td>[${endRegion}]${endTerminal}</td>
-			<td>${busNo}</td>
-			<td id = seat_num_list><c:forEach var="seatNo" items="${seatNo}">${seatNo}번 </c:forEach></td>
-			<%--<td>${seatNo}</td>--%>
-			<td>${people}</td>
-			<td>${departureTime}</td>
-			<td>${price}</td>
-		</tr>
-		</tbody>
-	</table>
+	<div id="pay_payInfo-2">
+		<h5>결제정보</h5>
+		<div id="pay_payInfo-3">
+			<form method="post" action="reserve_pay_ok">
+				<input type="hidden" name="payNo" value="${payNo }">
+				<input type="hidden" name="id" id="userId" value="${id }">
+				<input type="hidden" name="paymentDate" value="${paymentDate }">
+				<input type="hidden" name="payStatus" value="${payStatus }">
+				<div id="birthText">
+					<label class="pay_label">생년월일 8자리</label>
+				</div>
+				<div id="birthTextInfo">
+					<input type="text" name="birth" id="birth" placeholder="생년월일" maxlength="8" value="${birth }"
+						   pattern="\d{8}" class="form-control">
+				</div>
+				<div id="cardText">
+					<label class="pay_label">카드번호 16자리</label>
+				</div>
+				<div id="cardTextInfo">
+					<input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+						   class="form-control"> -
+					<input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+						   class="form-control"> -
+					<input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+						   class="form-control"> -
+					<input type="text" id="cardNo4" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"
+						   class="form-control">
+				</div>
+				<br>
+
+				<div id="cardPasswordDiv">
+					<div id="cardPasswordText">
+						<label class="pay_label">카드 비밀번호</label>
+					</div>
+					<div>
+						<input type="text" id="cardPassword" class="form-control" maxlength="2" pattern="\d{2}"> **
+					</div>
+				</div>
+
+				<div id="selectId">
+					<label class="pay_label">유효기간</label>
+				</div>
+				<div id="selectMonthAndYear">
+					<select id="cardDropdownMonth" class="form-control">
+						<option value="01">01</option>
+						<option value="02">02</option>
+						<option value="03">03</option>
+						<option value="04">04</option>
+						<option value="05">05</option>
+						<option value="06">06</option>
+						<option value="07">07</option>
+						<option value="08">08</option>
+						<option value="09">09</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+					<label for="cardDropdownMonth">월</label>
+					&emsp;
+					<select id="cardDropdownYear" class="form-control"></select>
+					<label for="cardDropdownYear">년</label>
+				</div>
+				<br>
+				<input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">
+				<button type="submit" id="payInsert" class="btn btn-primary">제출</button>
+			</form>
+		</div>
+	</div>
 </div>
-
-	<!-- reserve_pay_content1 시작 -->
-	<div id="reserve_pay_content1">
-		<form method="post" action="reserve_pay_ok">
-			<input type="hidden" name="payNo" value="${payNo }">
-			<input type="hidden" name="id" id="userId" value="${id }">
-			<!--<input type="hidden" name="amount" value="${price}">-->
-			<input type="hidden" name="paymentDate" value="${paymentDate }">
-			<input type="hidden" name="payStatus" value="${payStatus }">
-			<input type="hidden" id="cardName" value="${cardName}">
-			<input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"> -
-			<input type="text" id="cardNo4" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}">
-			<br>
-			<select id="cardDropdownMonth">
-				<option value="01">01</option>
-				<option value="02">02</option>
-				<option value="03">03</option>
-				<option value="04">04</option>
-				<option value="05">05</option>
-				<option value="06">06</option>
-				<option value="07">07</option>
-				<option value="08">08</option>
-				<option value="09">09</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12">12</option>
-			</select>
-			<label for="cardDropdownMonth">월</label>
-			&emsp;
-			<select id="cardDropdownYear"></select>
-			<label for="cardDropdownYear">년</label>
-			<br>
-			<input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth }" pattern="\d{8}">
-			<br>
-			<input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">
-			<button type="submit" id="payInsert">제출</button>
-		</form>
-	</div>
 	<!-- reserve_pay_content1 끝 -->
 
-<%--&lt;%&ndash;<div id="pay_payInfo-2">&ndash;%&gt; <%--TODO: 내용 확인후 삭제여부 판다!&ndash;%&gt;--%>
-<%--    <h5>결제정보</h5>--%>
-<%--    <div id="pay_payInfo-3">--%>
-<%--        <form method="post" action="reserve_pay_ok">--%>
-<%--            <input type="hidden" name="payNo" value="${payNo }">--%>
-<%--            <input type="hidden" name="id" id="userId" value="${id }">--%>
-<%--            <input type="hidden" name="paymentDate" value="${paymentDate }">--%>
-<%--            <input type="hidden" name="payStatus" value="${payStatus }">--%>
-<%--            <div id="birthText">--%>
-<%--                <label class="pay_label">생년월일 8자리</label>--%>
-<%--            </div>--%>
-<%--            <div id="birthTextInfo">--%>
-<%--                <input type="text" name="birth" id="birth" placeholder="생년월일 8자리" maxlength="8" value="${birth }"--%>
-<%--                       pattern="\d{8}" class="form-control">--%>
-<%--            </div>--%>
-<%--            <div id="cardText">--%>
-<%--                <label class="pay_label">카드번호 16자리</label>--%>
-<%--            </div>--%>
-<%--            <div id="cardTextInfo">--%>
-<%--                <input type="text" id="cardNo1" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"--%>
-<%--                       class="form-control"> ---%>
-<%--                <input type="text" id="cardNo2" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"--%>
-<%--                       class="form-control"> ---%>
-<%--                <input type="text" id="cardNo3" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"--%>
-<%--                       class="form-control"> ---%>
-<%--                <input type="text" id="cardNo4" name="cardNo" placeholder="카드번호" maxlength="4" pattern="\d{4}"--%>
-<%--                       class="form-control">--%>
-<%--            </div>--%>
-<%--            <br>--%>
-<%--            <div id="selectId">--%>
-<%--                <label class="pay_label">유효기간</label>--%>
-<%--            </div>--%>
-<%--            <div id="selectMonthAndYear">--%>
-<%--                <select id="cardDropdownMonth" class="form-control">--%>
-<%--                    <option value="01">01</option>--%>
-<%--                    <option value="02">02</option>--%>
-<%--                    <option value="03">03</option>--%>
-<%--                    <option value="04">04</option>--%>
-<%--                    <option value="05">05</option>--%>
-<%--                    <option value="06">06</option>--%>
-<%--                    <option value="07">07</option>--%>
-<%--                    <option value="08">08</option>--%>
-<%--                    <option value="09">09</option>--%>
-<%--                    <option value="10">10</option>--%>
-<%--                    <option value="11">11</option>--%>
-<%--                    <option value="12">12</option>--%>
-<%--                </select>--%>
-<%--                <label for="cardDropdownMonth">월</label>--%>
-<%--                &emsp;--%>
-<%--                <select id="cardDropdownYear" class="form-control"></select>--%>
-<%--                <label for="cardDropdownYear">년</label>--%>
-<%--            </div>--%>
-<%--            <br>--%>
-<%--            <input type="hidden" name="phoneNo" id="phoneNo" placeholder="핸드폰번호" value="${phoneNo }">--%>
-<%--            <button type="submit" id="payInsert" class="btn btn-primary">제출</button>--%>
-<%--        </form>--%>
-<%--    </div>--%>
-<%--</div>--%>
 <script type="text/javascript" src="/resources/js/pay.js"></script>
 <script type="text/javascript">
 	// 현재 년도를 가져오는 함수
