@@ -1,5 +1,6 @@
 package com.kosta.bus_reserve.service;
 
+import com.kosta.bus_reserve.domain.PayDTO;
 import com.kosta.bus_reserve.domain.SearchedDispatch;
 import com.kosta.bus_reserve.domain.TerminalVO;
 import com.kosta.bus_reserve.domain.TicketVO;
@@ -41,6 +42,13 @@ public class ReserveService {
 
     public List<SearchedDispatch> getRecordsByUserId(String userId){
         List<SearchedDispatch> list = reserveMapper.getRecordsByUserId(userId);
+        System.out.println(list);
+        return list;
+    }
+
+    //예매내역 조회(회원)
+    public List<PayDTO> getMemberReserveList(String id){
+        List<PayDTO> list = reserveMapper.getMemberReserveList(id);
         System.out.println(list);
         return list;
     }

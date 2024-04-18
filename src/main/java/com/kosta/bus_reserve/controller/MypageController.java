@@ -1,6 +1,8 @@
 package com.kosta.bus_reserve.controller;
 
+import com.kosta.bus_reserve.config.auth.PrincipalDetail;
 import com.kosta.bus_reserve.domain.MyCardVO;
+import com.kosta.bus_reserve.service.MemberService;
 import com.kosta.bus_reserve.service.MyCardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,10 +24,10 @@ public class MypageController {
     private MyCardService service;
 
     //로그인한 사용자의 id 가져오는 메서드 생성
-    private String getCurrentUserId() {
+    private String getCurrentUserId(){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Object principal = authentication.getPrincipal();
-        return ((UserDetails) principal).getUsername();
+        PrincipalDetail userDetails = (PrincipalDetail) authentication.getPrincipal();
+        return userDetails.getUserId();
     }
 
     @GetMapping("/mypage_info")

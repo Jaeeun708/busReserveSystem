@@ -1,18 +1,15 @@
 package com.kosta.bus_reserve.config;
 
-import com.kosta.bus_reserve.config.auth.PrincipalDetail;
-import com.kosta.bus_reserve.config.auth.PrincipalDetailService;
-import com.kosta.bus_reserve.domain.UserVO;
+import com.kosta.bus_reserve.config.auth.LoginSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
@@ -24,6 +21,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
+
+    //로그인 성공시 핸들러
+    @Autowired
+    public AuthenticationSuccessHandler loginSuccessHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -37,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .formLogin()
                 .loginPage("/memger/login") //사용자가 인증되지 않은 경우 로그인 폼으로 이동
                 .loginProcessingUrl("/login")  //로그인 창에 입력한 데이터 처리
-                .defaultSuccessUrl("/reserve/reserve_main") //로그인 성공후 이동할 페이지*/
+                .successHandler(loginSuccessHandler)
 
                 .and()
                 .logout()

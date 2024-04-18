@@ -1,10 +1,17 @@
 package com.kosta.bus_reserve.controller;
 
+import com.kosta.bus_reserve.config.auth.PrincipalDetail;
+import com.kosta.bus_reserve.domain.PayDTO;
 import com.kosta.bus_reserve.domain.SearchedDispatch;
 import com.kosta.bus_reserve.domain.TerminalVO;
 import com.kosta.bus_reserve.domain.TicketVO;
+import com.kosta.bus_reserve.service.MemberService;
 import com.kosta.bus_reserve.service.ReserveService;
+import oracle.ucp.proxy.annotation.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +23,16 @@ import java.util.List;
 @RequestMapping("/reserve/*")
 public class ReserveController {
 
+    //로그인한 사용자의 id 가져오는 메서드 생성
+    private String getCurrentUserId(){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetail userDetails = (PrincipalDetail) authentication.getPrincipal();
+        return userDetails.getUserId();
+    }
+
     @Autowired
     private ReserveService reserveService;
+
 
     @GetMapping("test")
     public String test(){
@@ -94,13 +109,14 @@ public class ReserveController {
         return recordList;
     }
 
-    /*승차권 예매 조회*/
+    /*승차권 예매 조회(회원)*/
     @GetMapping("/reserve_list")
-    public String reserveList(){
-        return "reserve/reserve_list";
+    public List<PayDTO> reserveListView(Model model) {
+        String userId = getCurrentUserId();
+        List<PayDTO> reserveList = reserveService.getMemberReserveList(userId);
+        System.out.println("test: " + reserveList);
+        model.addAttribute("reserveList", reserveList);
+        return reserveList;
     }
 
-    /*승차권 예매 취소*/
-
-    /*승차권 예매 삭제*/
 }
