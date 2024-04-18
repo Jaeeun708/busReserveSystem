@@ -1,9 +1,6 @@
 package com.kosta.bus_reserve.service;
 
-import com.kosta.bus_reserve.domain.PayDTO;
-import com.kosta.bus_reserve.domain.SearchedDispatch;
-import com.kosta.bus_reserve.domain.TerminalVO;
-import com.kosta.bus_reserve.domain.TicketVO;
+import com.kosta.bus_reserve.domain.*;
 import com.kosta.bus_reserve.mapper.ReserveMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +44,8 @@ public class ReserveService {
     }
 
     //예매내역 조회(회원)
-    public List<PayDTO> getMemberReserveList(String id){
-        List<PayDTO> list = reserveMapper.getMemberReserveList(id);
+    public List<ReserveList> getMemberReserveList(String id){
+        List<ReserveList> list = reserveMapper.getMemberReserveList(id);
         System.out.println(list);
         return list;
     }

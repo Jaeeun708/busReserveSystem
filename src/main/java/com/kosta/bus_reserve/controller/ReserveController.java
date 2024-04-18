@@ -1,10 +1,7 @@
 package com.kosta.bus_reserve.controller;
 
 import com.kosta.bus_reserve.config.auth.PrincipalDetail;
-import com.kosta.bus_reserve.domain.PayDTO;
-import com.kosta.bus_reserve.domain.SearchedDispatch;
-import com.kosta.bus_reserve.domain.TerminalVO;
-import com.kosta.bus_reserve.domain.TicketVO;
+import com.kosta.bus_reserve.domain.*;
 import com.kosta.bus_reserve.service.MemberService;
 import com.kosta.bus_reserve.service.ReserveService;
 import oracle.ucp.proxy.annotation.Post;
@@ -113,9 +110,9 @@ public class ReserveController {
 
     /*승차권 예매 조회(회원)*/
     @GetMapping("/reserve_list")
-    public List<PayDTO> reserveListView(Model model) {
+    public List<ReserveList> reserveListView(Model model) {
         String userId = getCurrentUserId();
-        List<PayDTO> reserveList = reserveService.getMemberReserveList(userId);
+        List<ReserveList> reserveList = reserveService.getMemberReserveList(userId);
         System.out.println("test: " + reserveList);
         model.addAttribute("reserveList", reserveList);
         return reserveList;
