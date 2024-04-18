@@ -41,25 +41,25 @@ public class PayController {
         return "reserve/reserve_pay";
     }
 
-//    @GetMapping(value = {"reserve_pay/{id}", "reserve_pay"})
-//    public String mainRegisterPay(@PathVariable(value = "id") String id,
-//                                  Model model,
-//                                  HttpSession session) {
-//        System.out.println("------reserve_pay getmapping");
-//        System.out.println(session.getAttribute("seatNo"));
-//        model.addAttribute("startRegion", session.getAttribute("startRegion"));
-//        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
-//        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
-//        model.addAttribute("endRegion", session.getAttribute("endRegion"));
-//        model.addAttribute("busNo", session.getAttribute("busNo"));
-//        model.addAttribute("seatNo", session.getAttribute("seatNo"));
-//        model.addAttribute("people", session.getAttribute("people"));
-//        model.addAttribute("departureTime", session.getAttribute("departureTime"));
-//        model.addAttribute("dispatchNo", session.getAttribute("dispatchNo"));
-//        model.addAttribute("price", session.getAttribute("price"));
-//
-//        return "reserve/reserve_pay";
-//    }
+    @GetMapping("reserve_pay/{id}")  //회원 결제
+    public String mainRegisterPay(@PathVariable(value = "id") String id,
+                                  Model model,
+                                  HttpSession session) {
+        System.out.println("------reserve_pay getmapping");
+        System.out.println("좌석번호 : "+session.getAttribute("seatNo"));
+        model.addAttribute("startRegion", session.getAttribute("startRegion"));
+        model.addAttribute("startTerminal", session.getAttribute("startTerminal"));
+        model.addAttribute("endTerminal", session.getAttribute("endTerminal"));
+        model.addAttribute("endRegion", session.getAttribute("endRegion"));
+        model.addAttribute("busNo", session.getAttribute("busNo"));
+        model.addAttribute("seatNo", session.getAttribute("seatNo"));
+        model.addAttribute("people", session.getAttribute("people"));
+        model.addAttribute("departureTime", session.getAttribute("departureTime"));
+        model.addAttribute("dispatchNo", session.getAttribute("dispatchNo"));
+        model.addAttribute("price", session.getAttribute("price"));
+
+        return "reserve/reserve_pay";
+    }
 
     @GetMapping("reserve_ok")
     public String endRegisterPay(Model model, HttpSession session) {
