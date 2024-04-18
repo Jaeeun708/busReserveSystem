@@ -45,4 +45,14 @@ public class ReserveService {
         return list;
     }
 
+    public int insertTickets(List<TicketVO> tickets){
+        int insertCount = 0;
+        for(TicketVO ticket : tickets){
+            reserveMapper.insertTicket(ticket);
+            insertCount++;
+        }
+
+        return insertCount; //삽입된 행수 (=티켓 발매 수)
+    }
+
 }

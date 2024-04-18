@@ -10,7 +10,8 @@ public interface PayMapper {
 
     public String getTime();
     public int insertPay(PayDTO pay);
-
     public UserVO selectUserInfoAndCard(String id);
+
+    public String getSeqPay();
 
 }
