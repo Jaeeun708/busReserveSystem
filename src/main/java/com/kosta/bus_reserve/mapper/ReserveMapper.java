@@ -1,6 +1,5 @@
 package com.kosta.bus_reserve.mapper;
 
-import com.kosta.bus_reserve.domain.PayDTO;
 import com.kosta.bus_reserve.domain.SearchedDispatch;
 import com.kosta.bus_reserve.domain.TerminalVO;
 import com.kosta.bus_reserve.domain.TicketVO;
@@ -23,6 +22,9 @@ public interface ReserveMapper {
 
     //사용자 id로 기존에 예약했던 노선리스트 불러오기
     public List<SearchedDispatch> getRecordsByUserId(String userId);
+
+    //사용자 id로 예약내역 불러오기
+    public int insertTicket(TicketVO ticketVO);
 
     //예매내역 조회(회원)
     public List<PayDTO> getMemberReserveList(String id);

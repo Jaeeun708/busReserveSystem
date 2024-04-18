@@ -440,6 +440,7 @@
 						'</td>' +
 					'</tr>';
 			$('.seat-table').remove();
+			$('#comfirm-peopleNo').remove();
 			$(this).parent().parent().after(superSeatTable);
 
 			var dispatchNo = $(this).parent().parent().find('td.hidden').text();
@@ -521,12 +522,14 @@
 			var endTerminal = $(this).closest('table').closest('tr').prev().find('td').eq(3).text();
 			var busNo = $(this).closest('table').closest('tr').prev().find('td').eq(0).text();
 			var departureTime = $(this).closest('table').closest('tr').prev().find('td').eq(1).text();
+			var dispatchNo = $(this).closest('table').closest('tr').prev().find('td').eq(6).text();
 
 			console.log(startTerminal);
 			console.log(endTerminal);
 			console.log(busNo);
 			console.log(departureTime);
 			console.log(seatNo);
+			console.log(dispatchNo);
 
 			var regex = /\[(.*?)\](.*)/;
 			var matches = startTerminal.match(regex);
@@ -575,6 +578,7 @@
 							people: people,
 							departureTime: departureTime,
 							price: totalPrice,
+							dispatchNo: dispatchNo,
 							userId: userId
 						};
 						// 폼 엘리먼트를 생성하고 값을 설정합니다.

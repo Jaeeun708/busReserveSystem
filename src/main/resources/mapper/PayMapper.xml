@@ -10,7 +10,7 @@
 
     <insert id="insertPay">
         insert into pay (pay_no, id, amount, payment_date, pay_status, card_no, birth, phone_no)
-        values (SEQ_PAY.nextval, #{id}, #{amount}, sysdate, #{payStatus}, #{cardNo}, #{birth}, #{phoneNo})
+        values (#{payNo}, #{id}, #{amount}, sysdate, #{payStatus}, #{cardNo}, #{birth}, #{phoneNo})
     </insert>
 
     <resultMap id="userAndCardMap" type="com.kosta.bus_reserve.domain.UserVO">
@@ -29,6 +29,10 @@
         from user_info u, mycard m
         where u.id = #{id}
           and u.id = m.id(+)
+    </select>
+
+    <select id = "getSeqPay" resultType="String">
+        select seq_pay.nextval from dual
     </select>
 
 </mapper>
