@@ -24,6 +24,11 @@ jobs:
       - name: Build WAR file with Maven
         run: mvn clean package
 
+      - name: List files in project and target directiry
+        run: |
+          ls
+          ls target/*.war
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v2
         with:
