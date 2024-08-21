@@ -10,6 +10,12 @@
     
 - 총 소요시간 25일 / (본인 포함) 4명의 조원이 함께 진행하였습니다.
 ---
+### 통합개발환경 세팅
+![image](readme_img/develop_environment.png)   
+### project structure overview 패키지/폴더 구조
+![image](readme_img/structure.png)   
+
+---
 ### 팀 구성 및 역할   
 한송희 : UI master    
   • 화면 레이아웃    
@@ -36,5 +42,8 @@
   
 ---
 
+### 유스케이스 다이어그램
+![image](readme_img/usecase1.png)   
+![image](readme_img/usecase2.png)
 
   
