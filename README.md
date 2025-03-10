@@ -46,6 +46,11 @@
 ![image](readme_img/usecase1.png)   
 ![image](readme_img/usecase2.png)
 
+---
+
 ### ER 다이어그램
 ![image](readme_img/erd.png)
-  
+
+---
+### 내가 만든 기능 시연
+![image](readme_img/video1.gif)
