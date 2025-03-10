@@ -46,4 +46,6 @@
 ![image](readme_img/usecase1.png)   
 ![image](readme_img/usecase2.png)
 
+### ER 다이어그램
+![image](readme_img/erd.png)
   
