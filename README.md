@@ -52,5 +52,5 @@
 ![image](readme_img/erd.png)
 
 ---
-### 내가 만든 기능 시연
+### 내가 만든 기능 시연(배차조회,선택 / 좌석선택)
 ![image](readme_img/video1.gif)
